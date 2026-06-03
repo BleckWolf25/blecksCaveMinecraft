@@ -1,0 +1,141 @@
+{
+  "velocita-optimized": {
+    "overview": {
+      "title": "Introduction & Performance",
+      "contentMarkdown": ""
+    },
+    "features": {
+      "title": "Core Objectives",
+      "contentMarkdown": ""
+    },
+    "versions": {
+      "title": "Understanding Versions",
+      "contentMarkdown": ""
+    },
+    "notes": {
+      "title": "Creator Notes",
+      "contentMarkdown": ""
+    }
+  },
+  "builder-plus-plus": {
+    "overview": {
+      "title": "Architectural Toolkit",
+      "contentMarkdown": ""
+    },
+    "features": {
+      "title": "What Makes It Great",
+      "contentMarkdown": ""
+    }
+  },
+  "better-than-pvp": {
+    "overview": {
+      "title": "Tactical Combat Hub",
+      "contentMarkdown": ""
+    },
+    "disclaimer": {
+      "title": "Disclaimer & Creator Note",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea": {
+    "header-welcome": {
+      "title": "Welcome",
+      "contentMarkdown": "",
+      "isHeader": true
+    },
+    "getting-started": {
+      "title": "Getting Started (The First Day Guide)",
+      "contentMarkdown": "> Content coming soon"
+    },
+    "overview": {
+      "title": "Modpack info",
+      "contentMarkdown": ""
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "contentMarkdown": ""
+    },
+    "header-mechanics": {
+      "title": "Mechanics Codex",
+      "contentMarkdown": "",
+      "isHeader": true
+    },
+    "medical-realism": {
+      "title": "Medical Realism & Diet",
+      "contentMarkdown": ""
+    },
+    "temperature-survival": {
+      "title": "Temperature & Survival",
+      "contentMarkdown": "> Content coming soon"
+    },
+    "combat-style": {
+      "title": "Combat Style & Equipment Weight",
+      "contentMarkdown": ""
+    },
+    "header-progression": {
+      "title": "Progression & Crafting",
+      "contentMarkdown": "",
+      "isHeader": true
+    },
+    "metallurgy": {
+      "title": "Metallurgy & Smithing",
+      "contentMarkdown": ""
+    },
+    "questlines": {
+      "title": "Questlines & Character Classes",
+      "contentMarkdown": ""
+    },
+    "header-world": {
+      "title": "The World & Factions",
+      "contentMarkdown": "",
+      "isHeader": true
+    },
+    "bestiary": {
+      "title": "Bestiary (Predators & Mythic Beasts)",
+      "contentMarkdown": ""
+    },
+    "fortress-architecture": {
+      "title": "Fortress Architecture & Siege Defense",
+      "contentMarkdown": "> Content coming soon"
+    },
+    "minecolonies": {
+      "title": "MineColonies Management",
+      "contentMarkdown": "> Content coming soon"
+    },
+    "header-multiplayer": {
+      "title": "Multiplayer & Technical",
+      "contentMarkdown": "",
+      "isHeader": true
+    },
+    "server-setup": {
+      "title": "Server Setup & Multiplayer Penalties",
+      "contentMarkdown": ""
+    },
+    "performance": {
+      "title": "Performance Optimization & Presets",
+      "contentMarkdown": ""
+    },
+    "mods": {
+      "title": "Included Mods list",
+      "contentMarkdown": ""
+    },
+    "roadmap": {
+      "title": "Roadmap & Future Goals",
+      "contentMarkdown": ""
+    },
+    "modified": {
+      "title": "Compliance & Patches",
+      "contentMarkdown": ""
+    }
+  },
+  "mc-vanilla-tweaked": {
+    "overview": {
+      "title": "Nostalgic Roots",
+      "contentMarkdown": ""
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "contentMarkdown": ""
+    }
+  }
+}

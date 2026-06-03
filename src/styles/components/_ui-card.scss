@@ -1,0 +1,273 @@
+@use "../abstracts/variables" as *;
+
+// Reusable Modpack Grid Cards & Featured Hero Cards styling
+.modpack-card {
+  background: #0a0a0a;
+  border: 2px solid #333;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: 4px 4px 0 #333;
+  transition: all 0.2s ease-in-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--card-primary));
+    opacity: 0;
+    z-index: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px);
+    border-color: hsl(var(--card-primary));
+    box-shadow: 8px 8px 0 hsl(var(--card-primary));
+
+    &::before {
+      opacity: 0.1;
+    }
+
+    .card-icon {
+      background: hsl(var(--card-primary));
+      color: #000;
+    }
+
+    .card-title {
+      color: hsl(var(--card-primary));
+    }
+
+    .card-arrow {
+      background: hsl(var(--card-primary));
+      border-color: hsl(var(--card-primary));
+      color: #000;
+      transform: translateX(4px);
+    }
+  }
+
+  &.archived {
+    border-style: dashed;
+  }
+}
+
+.archive-badge-portal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: rgba(255, 165, 0, 0.15);
+  color: #ffa500;
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-header {
+  position: relative;
+  z-index: 2;
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 2px solid hsl(var(--card-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--card-primary));
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  transition: $theme-transition;
+}
+
+.card-summary {
+  font-size: 0.95rem;
+  color: hsl(var(--secondary-text));
+  line-height: 1.5;
+}
+
+.card-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: hsl(var(--card-primary));
+  font-weight: 600;
+}
+
+.card-arrow {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+// --------------------------------------------------------------------------
+// Featured Portal Hero (Aetas Ferrea Card Specific Styles)
+// --------------------------------------------------------------------------
+.portal-hero-section {
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.featured-hero-card {
+  width: 100%;
+  min-height: 500px;
+  background: url('/assets/aetas_ferrea_bg.png') center/cover no-repeat;
+  border: 2px solid hsl(15, 60%, 20%);
+  border-left: 8px solid hsl(15, 60%, 40%);
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 100%),
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 1; // Resets normal Card hover opacity transition overrides
+  }
+
+  & > * {
+    z-index: 1;
+    position: relative;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 1), 0 0 40px hsla(15, 60%, 40%, 0.3);
+    border-color: hsl(15, 60%, 40%);
+
+    &::before {
+      opacity: 1; // Preserve solid overlay
+    }
+
+    .card-arrow {
+      background: hsl(15, 60%, 40%);
+      color: #fff;
+      transform: translateX(10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+  }
+
+  .card-header {
+    max-width: 700px;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .card-icon {
+    width: 72px;
+    height: 72px;
+    background: rgba(20, 15, 10, 0.8);
+    border: 2px solid hsl(15, 60%, 40%);
+    color: hsl(15, 60%, 50%);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-title {
+    font-size: 4rem;
+    font-family: 'Times New Roman', Times, serif;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+
+  .card-summary {
+    font-size: 1.25rem;
+    color: #d1c7b7;
+    line-height: 1.7;
+    margin-bottom: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .card-tag {
+    background: rgba(20, 15, 10, 0.8);
+    border: 1px solid hsl(15, 60%, 40%);
+    color: #d1c7b7;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-arrow {
+    width: auto;
+    height: auto;
+    padding: 1rem 2.5rem;
+    background: rgba(20, 15, 10, 0.8);
+    border: 2px solid hsl(15, 60%, 40%);
+    color: #f1e2c3;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    &::after {
+      content: ' Enter Kingdom →';
+    }
+
+    svg {
+      display: none;
+    }
+  }
+}

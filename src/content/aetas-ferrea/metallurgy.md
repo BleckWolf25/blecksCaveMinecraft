@@ -1,0 +1,2 @@
+## ⚒️ Real-Life Accurate Crafting & Metallurgy
+*"Ars fabrilis"* - The craft of the smith. In *Aetas Ferrea*, over 100+ recipes have been overhauled to be more realistic and harder, such as tools and weaponry recipes requiring rope, sticks and the material to be crafted!

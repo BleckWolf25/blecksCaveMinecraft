@@ -1,0 +1,235 @@
+@use "../abstracts/variables" as *;
+
+// ==========================================================================
+// Portal Landing Page — full layout for the central modpack dashboard
+// ==========================================================================
+
+// Full-page container (rendered into #app)
+.portal-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 4rem 6rem;
+  min-height: 100vh;
+  position: relative;
+
+  @media (max-width: 1200px) {
+    padding: 4rem 3rem 5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Portal Hero Header (title + subtitle)
+// --------------------------------------------------------------------------
+.portal-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  animation: portal-fade-up 0.8s $transition-bezier both;
+}
+
+.portal-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 1.5rem;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: hsl(var(--primary));
+    margin: 1.5rem auto 0;
+    box-shadow: 0 0 20px hsla(var(--primary), 0.6);
+  }
+}
+
+.portal-subtitle {
+  font-size: 1.15rem;
+  color: hsl(var(--secondary-text));
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+// --------------------------------------------------------------------------
+// Section label above the grid
+// --------------------------------------------------------------------------
+.portal-grid-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: hsl(var(--secondary-text));
+  margin-bottom: 1.75rem;
+  opacity: 0.7;
+}
+
+// --------------------------------------------------------------------------
+// Filter Section — grouped multi-select
+// --------------------------------------------------------------------------
+.portal-filter-section {
+  margin-bottom: 2.5rem;
+  animation: portal-fade-up 0.8s $transition-bezier 0.1s both;
+}
+
+.portal-filter-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.filter-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-group-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: hsl(var(--secondary-text));
+  opacity: 0.7;
+}
+
+.filter-group-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--primary));
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.filter-group-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// Meta row — archived toggle + reset button
+.portal-filter-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid hsla(var(--border), 0.15);
+}
+
+.filter-archive-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: hsl(var(--secondary-text));
+  user-select: none;
+  transition: color 0.2s ease;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid hsla(var(--border), 0.6);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:checked {
+      background: hsl(var(--primary));
+      border-color: hsl(var(--primary));
+
+      &::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 10px;
+        color: #000;
+        font-weight: 800;
+      }
+    }
+  }
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.filter-reset-btn {
+  background: transparent;
+  border: none;
+  color: hsla(var(--primary), 0.7);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: hsl(var(--primary));
+  }
+}
+
+// --------------------------------------------------------------------------
+// Modpack Card Grid
+// --------------------------------------------------------------------------
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  animation: portal-fade-up 0.8s $transition-bezier 0.2s both;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Utility: hidden card during filter
+.hidden {
+  display: none !important;
+}
+
+// --------------------------------------------------------------------------
+// Portal entrance keyframe animations
+// --------------------------------------------------------------------------
+@keyframes portal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

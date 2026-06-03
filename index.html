@@ -1,0 +1,58 @@
+<!--
+ * @file index.html
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Main HTML5 shell, SEO meta tags, and root mounting portal.
+ *
+ * @description BEHAVIOR:
+ * - Establishes the static viewport DOM structure, SEO indexing tags, and hooks the Vite module bundler.
+ *
+ * @since 01/06/2026
+ * @updated 01/06/2026
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌌%3C/text%3E%3C/svg%3E" />
+    
+    <!-- SEO Optimization -->
+    <title>Bleck's Wiki</title>
+    <meta name="description" content="The ultimate wiki guide for all creations by Bleckwolf25, including Velocita Optimized, Builder++, BetterThanPVP Aetas Ferrea. Find installations, updates, specifications and information." />
+    <meta name="keywords" content="minecraft, modpack, mods, resourcepacks, shaderpacks, wiki, guide, realism, pvp, builder" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Bleckwolf25" />
+
+    <!-- Open Graph (Facebook / Discord / Social Share Previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bleck's Wiki | Custom Modpack Universes" />
+    <meta property="og:description" content="Discover, download, and dominate with the custom modpacks of Bleck's. View dynamic guides, key features, and full specifications in our high-fidelity theme-morphing wiki." />
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌌%3C/text%3E%3C/svg%3E" />
+    <meta property="og:url" content="https://bleckscaveminecraft.wiki" />
+
+    <!-- Google Fonts Preconnect links for fast page load performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Default Portal Theme Font Link (Dynamically updated per modpack in theme.js) -->
+    <link id="theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" />
+
+    <!-- Core Styling -->
+    <link rel="stylesheet" href="/src/styles/style.scss" />
+  </head>
+  <body class="theme-portal" data-theme="portal">
+    
+    <!-- Full-screen transition wipe overlay mount point -->
+    <div id="theme-wipe-overlay" class="theme-transition-overlay"></div>
+
+    <!-- Application Root container mount point -->
+    <div id="app"></div>
+  
+    <!-- Application Module Entrypoint -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

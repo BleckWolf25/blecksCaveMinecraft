@@ -1,0 +1,233 @@
+@use "../abstracts/variables" as *;
+
+// --------------------------------------------------------------------------
+// 1. Global Portal Hub Theme
+// --------------------------------------------------------------------------
+body.theme-portal {
+  background-color: #050505;
+  background-image: none;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 2. Velocita Optimized (Terminal Speed Theme)
+// --------------------------------------------------------------------------
+body.theme-velocita-optimized {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: #0a0a0c;
+  background-image: none;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 200, 0.05) 2px, rgba(0, 255, 200, 0.05) 4px);
+    pointer-events: none;
+    animation: velocita-speed-lines 20s linear infinite;
+  }
+
+  @keyframes velocita-speed-lines {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+  }
+
+  // Sidebar Overrides
+  .wiki-sidebar,
+  .wiki-specs-panel {
+    background: #000;
+    border-color: rgba(0, 255, 200, 0.2);
+  }
+
+  .sidebar-menu-btn.active {
+    background: rgba(0, 255, 200, 0.1);
+    border-left: 2px solid #00ffc8;
+    color: #00ffc8;
+  }
+
+  .wiki-callout {
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    border-left: 4px solid #00ffc8;
+    background: #000;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 3. Builder++ (Blueprint Grid Theme)
+// --------------------------------------------------------------------------
+body.theme-builder-plus-plus {
+  background-color: #1a2a3a;
+  background-image: none;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    pointer-events: none;
+  }
+
+  // Sidebar Overrides
+  .wiki-sidebar,
+  .wiki-specs-panel {
+    background: #111b24;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-menu-btn.active {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    color: #fff;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 4. BetterThanPVP (Aggressive Esports Theme)
+// --------------------------------------------------------------------------
+body.theme-better-than-pvp {
+  font-family: 'Inter', sans-serif;
+  background-color: #0b0b0b;
+  background-image: none;
+  color: #e0e0e0;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: repeating-linear-gradient(45deg, rgba(255, 0, 0, 0.02), rgba(255, 0, 0, 0.02) 10px, transparent 10px, transparent 20px);
+    pointer-events: none;
+  }
+
+  .wiki-callout {
+    background: #111;
+    border: 1px solid #333;
+    border-left: 4px solid hsl(355, 85%, 50%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  }
+
+  .sidebar-menu-btn {
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+
+  .sidebar-menu-btn.active {
+    background: hsl(355, 85%, 15%);
+    border-left: 3px solid hsl(355, 85%, 50%);
+    color: #fff;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 5. Aetas Ferrea (Heavy Medieval Manuscript Theme)
+// --------------------------------------------------------------------------
+body.theme-aetas-ferrea {
+  font-family: 'Merriweather', serif;
+  background-color: #12100e;
+  background-image: none;
+  color: #d1c7b7;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .wiki-callout {
+    background: #1a1714;
+    border: 2px solid hsl(15, 60%, 20%);
+    border-left: 6px solid hsl(15, 60%, 40%);
+  }
+
+  .sidebar-menu-btn.active {
+    background: hsl(15, 60%, 15%);
+    border: 1px solid hsl(15, 60%, 30%);
+    color: #d1c7b7;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 1px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 6. MC Vanilla Tweaked (Classic dirt pixel CRT Theme)
+// --------------------------------------------------------------------------
+body.theme-mc-vanilla-tweaked {
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.8)),
+    linear-gradient(to bottom, hsl(var(--primary-bg)), hsl(25, 45%, 6%));
+  background-attachment: fixed;
+  image-rendering: pixelated;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Crect width='4' height='4' fill='rgba(0,0,0,0.08)'/%3E%3C/svg%3E");
+    background-size: 8px 8px;
+    pointer-events: none;
+  }
+
+  .sidebar-menu-btn,
+  .wiki-callout,
+  .nav-switcher-btn,
+  .modpack-card {
+    border: 4px solid #4a3321;
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .sidebar-menu-btn {
+    &.active {
+      background: #5c8e32;
+      border-color: #3b5e20;
+      color: #fff;
+      box-shadow: inset 4px 4px 0 #2c4418, 4px 4px 0 #000;
+    }
+
+    &:hover:not(.active) {
+      background: #8e6c4f;
+      border-color: #6a4f37;
+      color: #fff;
+    }
+  }
+
+  .wiki-callout {
+    background: #3c2f23;
+    border-color: #5c8e32;
+  }
+
+  .archive-banner {
+    background: #ffaa00;
+    color: #000;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 4px solid #cc8800;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}

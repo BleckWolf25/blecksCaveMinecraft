@@ -1,0 +1,27 @@
+// Global Transitions & Animations Variables
+$transition-speed: 0.5s;
+$transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
+
+// Standard CSS variables mapped into dynamic Sass tokens
+$theme-transition: background-color #{$transition-speed} #{$transition-bezier},
+  color #{$transition-speed} #{$transition-bezier},
+  border-color #{$transition-speed} #{$transition-bezier},
+  box-shadow #{$transition-speed} #{$transition-bezier},
+  text-shadow #{$transition-speed} #{$transition-bezier},
+  transform #{$transition-speed} #{$transition-bezier};
+
+// Reusable Mixins for Visual Premium Effects
+@mixin glass-panel($bg-opacity: 0.6, $blur: 12px) {
+  background: hsla(var(--surface), #{$bg-opacity});
+  backdrop-filter: blur(#{$blur});
+  -webkit-backdrop-filter: blur(#{$blur});
+  border: 1px solid hsla(var(--border), 0.15);
+}
+
+@mixin text-glow($color-var: --primary, $alpha: 0.6, $radius: 8px) {
+  text-shadow: 0 0 #{$radius} hsla(var(#{$color-var}), #{$alpha});
+}
+
+@mixin border-glow($color-var: --primary, $alpha: 0.3, $radius: 15px) {
+  box-shadow: 0 0 #{$radius} hsla(var(#{$color-var}), #{$alpha});
+}

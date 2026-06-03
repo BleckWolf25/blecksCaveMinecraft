@@ -1,0 +1,90 @@
+@use "../abstracts/variables" as *;
+
+:root {
+  /* Default Theme Tokens (Fallback to Portal Theme) */
+  --font-family: 'Outfit', sans-serif;
+  --primary: 180, 100%, 50%;
+  --primary-bg: 220, 20%, 8%;
+  --primary-text: 210, 20%, 98%;
+  --secondary-text: 215, 15%, 70%;
+  --surface: 220, 20%, 12%;
+  --border: 220, 20%, 20%;
+  --glow: 180, 100%, 50%;
+  --shadow: 0, 0%, 0%;
+
+  /* Global Animations & Transitions */
+  --transition-speed: #{$transition-speed};
+  --transition-bezier: #{$transition-bezier};
+  --theme-transition: #{$theme-transition};
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: hsl(var(--primary-bg));
+  color: hsl(var(--primary-text));
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: var(--theme-transition);
+}
+
+// Custom Scrollbars
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--primary-bg));
+  transition: var(--theme-transition);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(var(--primary), 0.3);
+  border-radius: 5px;
+  border: 2px solid hsl(var(--primary-bg));
+  transition: var(--theme-transition);
+
+  &:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+// Base Typography
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: var(--theme-transition);
+
+  &:hover {
+    @include text-glow(--primary, 0.6, 8px);
+  }
+}
+
+// Transition Wipe Screen System (Liquid Swipes)
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: hsl(var(--primary-bg));
+  z-index: 9999;
+  pointer-events: none;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+
+  &.active {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  &.fade-out {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
