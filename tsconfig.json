@@ -1,26 +1,35 @@
 {
   "compilerOptions": {
+    // Environment & Module System
     "target": "ES2022",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    // Bundler-Friendly Module Resolution
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
 
-    /* Linting / Strictness */
+    // Strict Type-Checking Options
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "allowJs": true,
+    "checkJs": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "allowJs": true,
-    "checkJs": false
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+
+    "types": ["@types/node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "tests/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "tests/**/*.ts",
+    "eslint.config.js"
+  ]
 }

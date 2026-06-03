@@ -1,4 +1,5 @@
 /**
+ *
  * @file eslint.config.js
  *
  * @version 1.0.0
@@ -6,19 +7,27 @@
  * @license MIT
  *
  * @summary Flat ESLint configuration prioritizing security, performance, and TS type-checking.
- * 
- * @description Integrates Prettier to avoid formatting conflicts and uses standard globals
+ *
+ * @description
+ * Integrates Prettier to avoid formatting conflicts and uses standard globals
  * rather than hardcoded environment variables.
- * 
+ *
  * @since 01/06/2026
  * @updated 03/06/2026
  */
-
+/* eslint-disable */
+// ---------- IMPORTS
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// ---------- CONFIGURATION
 export default tseslint.config(
   // 1. Inherit core JS and type-aware TS configurations
   js.configs.recommended,
@@ -30,12 +39,12 @@ export default tseslint.config(
       sourceType: 'module',
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
       },
-      // DRY: Utilize standard definitions over hardcoded magic strings
+      // Utilize standard definitions over hardcoded magic strings
       globals: {
         ...globals.browser,
-        ...globals.node, // Needed for Vite/Vitest config files
+        ...globals.node,
       }
     },
     rules: {
@@ -48,12 +57,12 @@ export default tseslint.config(
       'no-var': 'error',
       'prefer-const': 'error',
       'no-console': ['warn', { 'allow': ['warn', 'error'] }],
-      
+
       // Enforce explicit return types for better documentation and self-documenting code
       '@typescript-eslint/explicit-function-return-type': 'warn'
     }
   },
-  
+
   // 3. Must remain last: disables all ESLint rules that conflict with Prettier
   prettierConfig
 );
