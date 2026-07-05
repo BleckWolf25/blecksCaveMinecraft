@@ -37,7 +37,7 @@ updates:
           - "*playwright*"
 
   # Enable version updates for GitHub Actions
-  - package-ecosystem:/github-actions
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
