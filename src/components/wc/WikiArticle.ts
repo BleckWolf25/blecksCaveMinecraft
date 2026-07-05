@@ -250,12 +250,22 @@ function openLightbox(src: string, alt: string): void {
     document.body.appendChild(overlay);
     overlay.addEventListener('click', () => overlay?.classList.remove('active'));
   }
-  overlay.innerHTML = `
-    <div class="lightbox-content">
-      <img src="${src}" alt="${alt}" />
-      <div class="lightbox-caption">${alt}</div>
-    </div>
-  `;
+
+  const content = document.createElement('div');
+  content.className = 'lightbox-content';
+
+  const image = document.createElement('img');
+  image.src = src;
+  image.alt = alt;
+
+  const caption = document.createElement('div');
+  caption.className = 'lightbox-caption';
+  caption.textContent = alt;
+
+  content.appendChild(image);
+  content.appendChild(caption);
+  overlay.replaceChildren(content);
+
   setTimeout(() => overlay?.classList.add('active'), 10);
 }
 
