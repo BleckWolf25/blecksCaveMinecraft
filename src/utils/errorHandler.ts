@@ -36,13 +36,34 @@ export function initGlobalErrorHandling(): void {
   // ---------- UNHANDLED EXCEPTION HANDLER
   window.addEventListener('error', (event) => {
     console.error('Global error caught:', event.error);
-    showError('An unexpected error occurred', event.error?.message || 'Unknown error');
+    const err = event.error as unknown;
+    const details =
+      err instanceof Error
+        ? err.message
+        : err && typeof err === 'object' && 'message' in err
+          ? String((err as Record<string, unknown>).message)
+          : event.message || 'Unknown error';
+
+    showError('An unexpected error occurred', details);
   });
 
   // ---------- UNHANDLED PROMISE REJECTION HANDLER
   window.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled promise rejection:', event.reason);
-    showError('An asynchronous operation failed', event.reason?.message || 'Unknown error');
+    const reason = event.reason as unknown;
+    const details =
+      reason instanceof Error
+        ? reason.message
+        : reason && typeof reason === 'object'
+          ? 'message' in reason
+            ? String((reason as Record<string, unknown>).message)
+            : JSON.stringify(reason, Object.getOwnPropertyNames(reason), 2)
+          : reason !== undefined && reason !== null
+            ? // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+              String(reason as string | number | boolean)
+            : 'Unknown error';
+
+    showError('An asynchronous operation failed', details);
   });
 }
 
@@ -207,7 +228,14 @@ export async function withErrorHandling<T>(
     return await operation();
   } catch (error) {
     console.error(errorMessage, error);
-    showError(errorMessage, error instanceof Error ? error.message : String(error));
+    showError(
+      errorMessage,
+      error instanceof Error
+        ? error.message
+        : typeof error === 'object' && error !== null
+          ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+          : String(error)
+    );
     return null;
   }
 }

@@ -144,9 +144,6 @@ docs/
 # Husky
 .husky/
 
-# Scripts (keep essential ones)
-scripts/
-
 # Lock files (keep all lockfiles for reproducible builds)
 yarn.lock
 
