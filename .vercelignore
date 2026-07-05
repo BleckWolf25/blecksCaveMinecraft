@@ -132,11 +132,6 @@ specs/
 *.spec.js
 *.spec.ts
 
-# Documentation
-docs/
-*.md
-!README.md
-
 # Git
 .git/
 .gitignore
