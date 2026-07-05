@@ -64,10 +64,6 @@
       "title": "Medical Realism & Diet",
       "contentMarkdown": ""
     },
-    "temperature-survival": {
-      "title": "Temperature & Survival",
-      "contentMarkdown": "> Content coming soon"
-    },
     "combat-style": {
       "title": "Combat Style & Equipment Weight",
       "contentMarkdown": ""
@@ -91,16 +87,8 @@
       "isHeader": true
     },
     "bestiary": {
-      "title": "Bestiary (Predators & Mythic Beasts)",
+      "title": "Horrors & Nether",
       "contentMarkdown": ""
-    },
-    "fortress-architecture": {
-      "title": "Fortress Architecture & Siege Defense",
-      "contentMarkdown": "> Content coming soon"
-    },
-    "minecolonies": {
-      "title": "MineColonies Management",
-      "contentMarkdown": "> Content coming soon"
     },
     "header-multiplayer": {
       "title": "Multiplayer & Technical",
@@ -116,7 +104,7 @@
       "contentMarkdown": ""
     },
     "mods": {
-      "title": "Included Mods list",
+      "title": "Projects List",
       "contentMarkdown": ""
     },
     "roadmap": {
@@ -135,6 +123,36 @@
     },
     "faq": {
       "title": "Frequently Asked Questions",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea-lib": {
+    "overview": {
+      "title": "Aetas Ferrea Lib",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea-farmers-delight": {
+    "overview": {
+      "title": "Farmer's Delight Integration",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea-spartan": {
+    "overview": {
+      "title": "Spartan Integration",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea-extras": {
+    "overview": {
+      "title": "Extras Integration",
+      "contentMarkdown": ""
+    }
+  },
+  "aetas-ferrea-minecolonies": {
+    "overview": {
+      "title": "MineColonies Integration",
       "contentMarkdown": ""
     }
   }

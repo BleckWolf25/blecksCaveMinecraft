@@ -1,9 +1,15 @@
 ## ⚙️ Technical Notes & Requirements
 
-To ensure _Aetas Ferrea_ runs smoothly without crashing or breaking scripts, please follow these strict technical guidelines before launching:
+To ensure *Aetas Ferrea* runs smoothly without crashing or breaking scripts, please follow these strict technical guidelines before launching:
 
-- **RAM Allocation:** This is a heavy, script-dense modpack. A minimum of **6GB of RAM** is required to run the game, but **8GB to 12GB is highly recommended** for smooth world generation and shader performance. Do not allocate more than 12GB, as Java Garbage Collection will cause lag spikes.
-- **Java Version:** Ensure you are using **Java 17 or later**, which is the required architecture for Minecraft 1.20.1.
-- **OptiFine Warning:** **DO NOT INSTALL OPTIFINE.** This modpack relies on modern rendering engines (Embeddium + Oculus) for performance and shader support. Adding OptiFine will instantly crash your game and corrupt your visual rendering.
-- **Shaders:** Shader support is built-in. For the intended photorealistic, gritty atmosphere, we recommend using _Kappa Shaders_ (if you have a card that supports ray-tracing and has more than 8GB of VRAM) or _SEUS PTGI_. You can enable them via the Video Settings > Shader Packs menu.
-- **Server Creation:** If hosting a multiplayer server, ensure your server properties are set to \
+* **RAM Allocation:** This is a heavy, script-dense modpack. A minimum of **6GB of RAM** is required to run the game, but **8GB to 12GB is highly recommended** for smooth world generation and shader performance. Do not allocate more than 12GB, as Java Garbage Collection will cause lag spikes.
+* **Java Version:** Ensure you are using **Java 17 or later**, which is the required architecture for Minecraft 1.20.1.
+* **OptiFine Warning:** **DO NOT INSTALL OPTIFINE.** This modpack relies on modern rendering engines (Embeddium + Oculus) for performance and shader support. Adding OptiFine will instantly crash your game and corrupt your visual rendering.
+* **Shaders:** Shader support is built-in. For the intended photorealistic, gritty atmosphere, we recommend using *Kappa Shaders* (if you have a card that supports ray-tracing and has more than 8GB of VRAM) or *Photon Shaders*. You can enable them via the Video Settings > Shader Packs menu.
+* **Server Creation:** If hosting a multiplayer server, ensure your server properties are set to `hardcore=true` to properly enforce the death and revival penalties. **I also will soon create a server rack modpack that setups your own custom server for yourself without you having to do the hard part (If you don't like/trust Essential)**.
+* **Modifying the Pack:** I highly recommend to NOT add, remove, or update any mods, resource packs, or KubeJS scripts. These components are strictly configured to work together. Modifying them poses a high risk of breaking the progression or world generation. **Any issues submitted on GitHub originating from modified versions of Aetas Ferrea will be completely ignored.**
+* **The Background Optimization State:** To further protect your system, *Aetas Ferrea* comes pre-configured with **FPS Reducer**. This client-side utility automatically throttles Minecraft down to a minuscule **5 FPS whenever the game window loses focus**. This stops the game from hogging your PC's resources, slashes laptop power consumption, and allows you to seamlessly multitask or use other windows while leaving the game safely idling in the background.
+
+  > ⚠️ **Troubleshooting:** Because this mod aggressively scales down hardware utilization, certain hardware architectures might experience minor visual glitches or a brief frame rate stutter (lasting longer than 3 seconds) upon tabbing back into the world if these latency bugs persist on your machine, you can safely disable this mod, it is strictly client-side and removing it will not break your server compatibility nor anything else. However, we highly recommend keeping it active to give your PC vital moments to breathe when you step away from the screen.
+
+***Note from the creator:** I highly recommend to play with shaders, this modpack was fully tested with shaders! (All of the available in the shader packs menu)*

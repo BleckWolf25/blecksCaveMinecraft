@@ -97,12 +97,20 @@ export function renderNavigation(
   Object.values(modpacks).forEach(pack => {
     const item = document.createElement('div');
     item.className = `dropdown-item ${pack.id === currentModpackId ? 'active' : ''}`;
+    item.setAttribute('data-pack', pack.id);
 
     const itemIcon = PACK_ICONS[pack.id] ?? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>';
 
+    const descParts = [pack.specs.mcVersions?.[0], pack.specs.loaders?.[0]].filter(Boolean);
+    const descStr = descParts.join(' • ');
+    const archivedBadge = pack.isArchived ? '<span class="archive-tag">ARCHIVED</span>' : '';
+
     item.innerHTML = `
-      <div class="dropdown-item-title">${itemIcon} ${pack.title} ${pack.isArchived ? '(Archived)' : ''}</div>
-      <div class="dropdown-item-desc">${pack.specs.mcVersions?.[0] ?? ''} • ${pack.specs.loaders?.[0] ?? ''}</div>
+      <div class="dropdown-icon">${itemIcon}</div>
+      <div class="dropdown-item-content">
+        <div class="dropdown-item-title">${pack.title} ${archivedBadge}</div>
+        <div class="dropdown-item-desc">${descStr}</div>
+      </div>
     `;
 
     // Connect selection callback and dismiss menu on item click

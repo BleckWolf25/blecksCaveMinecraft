@@ -56,13 +56,11 @@ export function initFilterSystem(config: FilterConfig): {
   };
 
   // Derive all unique filter options from data catalog
-  const allCategories = new Set<string>();
   const allLoaders = new Set<string>();
   const allVersions = new Set<string>();
   const allResolutions = new Set<string>();
 
   Object.values(modpacks).forEach(pack => {
-    pack.tags?.forEach(t => allCategories.add(t));
     pack.specs.loaders?.forEach(l => allLoaders.add(l));
     pack.specs.mcVersions?.forEach(v => allVersions.add(v));
     if (pack.specs.resolution) {
@@ -70,7 +68,6 @@ export function initFilterSystem(config: FilterConfig): {
     }
   });
 
-  const sortedCategories = Array.from(allCategories).sort();
   const sortedLoaders = Array.from(allLoaders).sort();
   const sortedResolutions = Array.from(allResolutions).sort();
   const sortedVersions = Array.from(allVersions).sort((a, b) => {
@@ -90,13 +87,14 @@ export function initFilterSystem(config: FilterConfig): {
     { id: 'modpack', label: 'Modpacks' },
     { id: 'mod', label: 'Mods' },
     { id: 'resource-pack', label: 'Resource Packs' },
+    { id: 'shader', label: 'Shaders' },
   ];
 
   const tabButtonsMap = new Map<string, HTMLButtonElement>();
 
   // ---------- TAB BADGE COMPUTATION
   function computeTabCounts(): Record<string, number> {
-    const counts: Record<string, number> = { all: 0, modpack: 0, mod: 0, 'resource-pack': 0 };
+    const counts: Record<string, number> = { all: 0, modpack: 0, mod: 0, 'resource-pack': 0, shader: 0 };
     Object.values(modpacks).forEach(pack => {
       // ---------- GUARD CLAUSE (ignore archived projects unless toggle is active)
       if (pack.isArchived && !filterState.showArchived) {
@@ -151,12 +149,11 @@ export function initFilterSystem(config: FilterConfig): {
         toggleBtn.classList.remove('active');
         toggleBtn.setAttribute('aria-pressed', 'false');
       });
-      updateGroupBadge(categoryGroup, 0);
       updateGroupBadge(loaderGroup, 0);
       updateGroupBadge(resolutionGroup, 0);
       updateGroupBadge(versionGroup, 0);
 
-      updateVisibleGroups();
+      updateFilterPillVisibility();
       applyFilter();
     });
 
@@ -222,17 +219,6 @@ export function initFilterSystem(config: FilterConfig): {
   }
 
   // ---------- SPECIFIC FILTER GROUP INSTANTIATION
-  // --- Category Group ---
-  const categoryGroup = document.createElement('div');
-  categoryGroup.className = 'filter-group filter-group-categories';
-  categoryGroup.innerHTML = `
-    <div class="filter-group-header">
-      <span class="filter-group-label">Category</span>
-      <span class="filter-group-badge" style="display:none"></span>
-    </div>
-  `;
-  buildFilterGroup(sortedCategories, filterState.categories, 'cat', categoryGroup);
-  filterGroupsRow.appendChild(categoryGroup);
 
   // --- Loader Group ---
   const loaderGroup = document.createElement('div');
@@ -270,13 +256,61 @@ export function initFilterSystem(config: FilterConfig): {
   buildFilterGroup(sortedVersions, filterState.versions, 'ver', versionGroup);
   filterGroupsRow.appendChild(versionGroup);
 
-  // ---------- GROUP VISIBILITY RULES
-  function updateVisibleGroups() {
-    loaderGroup.style.display = (filterState.activeTab === 'all' || filterState.activeTab === 'modpack' || filterState.activeTab === 'mod') ? 'block' : 'none';
-    resolutionGroup.style.display = (filterState.activeTab === 'resource-pack') ? 'block' : 'none';
+  // ---------- COMPATIBILITY & GROUP VISIBILITY UPDATE FUNCTION
+  function updateFilterPillVisibility() {
+    const compatibleLoaders = new Set<string>();
+    const compatibleVersions = new Set<string>();
+    const compatibleResolutions = new Set<string>();
+
+    Object.values(modpacks).forEach(pack => {
+      if (pack.isArchived && !filterState.showArchived) {
+        return;
+      }
+      if (filterState.activeTab === 'all' || (pack.type || 'modpack') === filterState.activeTab) {
+        pack.specs.loaders?.forEach(l => compatibleLoaders.add(l));
+        pack.specs.mcVersions?.forEach(v => compatibleVersions.add(v));
+        if (pack.specs.resolution) {
+          compatibleResolutions.add(pack.specs.resolution);
+        }
+      }
+    });
+
+    toggleBtnMap.forEach((btn, key) => {
+      const [groupKey, value] = key.split(':');
+      let isCompatible = false;
+
+      if (groupKey === 'loader') {
+        isCompatible = compatibleLoaders.has(value);
+      } else if (groupKey === 'res') {
+        isCompatible = compatibleResolutions.has(value);
+      } else if (groupKey === 'ver') {
+        isCompatible = compatibleVersions.has(value);
+      }
+
+      btn.style.display = isCompatible ? 'inline-flex' : 'none';
+
+      // Auto-clear incompatible selections
+      if (!isCompatible && btn.classList.contains('active')) {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+        if (groupKey === 'loader') filterState.loaders.delete(value);
+        if (groupKey === 'res') filterState.resolutions.delete(value);
+        if (groupKey === 'ver') filterState.versions.delete(value);
+      }
+    });
+
+    // Update badges
+    updateGroupBadge(loaderGroup, filterState.loaders.size);
+    updateGroupBadge(resolutionGroup, filterState.resolutions.size);
+    updateGroupBadge(versionGroup, filterState.versions.size);
+
+    // Hide entire groups if no options are compatible at all
+    loaderGroup.style.display = ((filterState.activeTab === 'all' || filterState.activeTab === 'modpack' || filterState.activeTab === 'mod') && compatibleLoaders.size > 0) ? 'block' : 'none';
+    resolutionGroup.style.display = (filterState.activeTab === 'resource-pack' && compatibleResolutions.size > 0) ? 'block' : 'none';
+    versionGroup.style.display = (compatibleVersions.size > 0) ? 'block' : 'none';
   }
 
-  updateVisibleGroups();
+  updateFilterPillVisibility();
   filterSection.appendChild(filterGroupsRow);
 
   // ---------- ARCHIVED TOGGLE & RESET CONTROLS
@@ -293,6 +327,7 @@ export function initFilterSystem(config: FilterConfig): {
   archiveCheckbox.addEventListener('change', () => {
     filterState.showArchived = archiveCheckbox.checked;
     updateTabBadges();
+    updateFilterPillVisibility();
     applyFilter();
   });
   filterMeta.appendChild(archiveLabel);
@@ -311,11 +346,11 @@ export function initFilterSystem(config: FilterConfig): {
       btn.classList.remove('active');
       btn.setAttribute('aria-pressed', 'false');
     });
-    updateGroupBadge(categoryGroup, 0);
     updateGroupBadge(loaderGroup, 0);
     updateGroupBadge(resolutionGroup, 0);
     updateGroupBadge(versionGroup, 0);
     updateTabBadges();
+    updateFilterPillVisibility();
     applyFilter();
   });
   filterMeta.appendChild(resetBtn);
@@ -339,14 +374,7 @@ export function initFilterSystem(config: FilterConfig): {
       return false;
     }
 
-    // ---------- CATEGORY & LOADER EVALUATION
-    if (filterState.categories.size > 0) {
-      const packTags = pack.tags || [];
-      const matchesCategory = packTags.some(t => filterState.categories.has(t));
-      if (!matchesCategory) {
-        return false;
-      }
-    }
+    // ---------- LOADER EVALUATION
 
     if (filterState.loaders.size > 0 && (filterState.activeTab === 'all' || filterState.activeTab === 'modpack' || filterState.activeTab === 'mod')) {
       const packLoaders = pack.specs.loaders || [];

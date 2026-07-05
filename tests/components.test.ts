@@ -80,7 +80,7 @@ describe('Modular UI Component Suite', () => {
     });
 
     it('should render category badges and type-specific footer tags for different project types', () => {
-      const resPack = modpacks['bleck-medical-realism']!;
+      const resPack = modpacks['aetas-ferrea-farmers-delight']!;
       const card = Card({ pack: resPack, onClick: vi.fn() });
 
       expect(card.querySelector('.category-badge-portal')?.textContent).toBe('RESOURCE PACK');
@@ -100,7 +100,7 @@ describe('Modular UI Component Suite', () => {
       expect(getActiveTab()).toBe('all');
       expect(filterSection.querySelector('.portal-category-tabs')).not.toBeNull();
 
-      const resPack = modpacks['bleck-medical-realism']!;
+      const resPack = modpacks['aetas-ferrea-farmers-delight']!;
       const modpack = modpacks['velocita-optimized']!;
 
       expect(packMatchesFilters(resPack)).toBe(true);

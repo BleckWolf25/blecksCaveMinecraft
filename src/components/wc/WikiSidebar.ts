@@ -184,7 +184,7 @@ export class WikiSidebar extends HTMLElement {
 
       // ---------- PAGE NAVIGATION BUTTON RENDERING
       const btn = Button({
-        html: `<span>${PAGE_ICONS[pageId] ?? DEFAULT_PAGE_ICON}</span><span>${pageData.title}</span>`,
+        html: `<span class="sidebar-btn-icon">${PAGE_ICONS[pageId] ?? DEFAULT_PAGE_ICON}</span><span class="sidebar-btn-text">${pageData.title}</span>`,
         variant: 'sidebar',
         isActive: pageId === activePage,
         onClick: () => {
@@ -205,8 +205,7 @@ export class WikiSidebar extends HTMLElement {
       });
 
       if (currentIndent) {
-        btn.style.marginLeft = '1.5rem';
-        btn.style.width = 'calc(100% - 1.5rem)';
+        btn.classList.add('stairwell-indent');
       }
 
       this._menuButtons[pageId] = btn;
@@ -269,8 +268,7 @@ export class WikiSidebar extends HTMLElement {
           : '1px solid hsla(var(--border),.5)';
         row.style.cssText = `display:flex;align-items:center;padding:.5rem;margin-bottom:.5rem;background:${pageData.isHeader ? 'hsla(var(--primary),.1)' : 'hsla(var(--surface),.8)'};border-left:${defaultBorder};border-radius:4px;`;
         if (!pageData.isHeader && currentIndent) {
-          row.style.marginLeft = '1.5rem';
-          row.style.width = 'calc(100% - 1.5rem)';
+          row.classList.add('stairwell-indent');
         }
 
         // ---------- DRAG AND DROP HANDLERS

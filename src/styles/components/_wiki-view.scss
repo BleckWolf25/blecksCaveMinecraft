@@ -156,6 +156,21 @@
   }
 }
 
+/* ---------- NESTED STAIRWELL SIDEBAR TREE ---------- */
+.sidebar-menu-btn.stairwell-indent .sidebar-btn-text,
+.stairwell-indent .sidebar-btn-text {
+  position: relative;
+  padding-left: 0.75rem;
+  border-left: 2px solid hsla(var(--primary), 0.35);
+  transition: all 0.25s ease;
+}
+
+.sidebar-menu-btn.stairwell-indent:hover .sidebar-btn-text,
+.sidebar-menu-btn.stairwell-indent.active .sidebar-btn-text {
+  border-left-color: hsl(var(--primary));
+  box-shadow: -3px 0 6px -2px hsla(var(--primary), 0.5);
+}
+
 /* ---------- CONTENT PANEL & ENTRANCE ANIMATION ---------- */
 .wiki-content-panel {
   flex-grow: 1;

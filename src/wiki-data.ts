@@ -217,155 +217,151 @@ export const modpacks: Record<string, Modpack> = {
     isArchived: true,
     pages: structureData['mc-vanilla-tweaked'],
   },
-  'bleck-qol-tweaks': {
-    id: 'bleck-qol-tweaks',
+  'aetas-ferrea-lib': {
+    id: 'aetas-ferrea-lib',
     type: 'mod',
-    title: 'Bleck QoL Tweaks',
+    title: 'Aetas Ferrea Lib',
     summary:
-      'Essential client utility mod adding smooth camera animations, instant inventory sorting, and customizable HUD elements.',
-    badge: 'New',
-    fontFamily: '"Outfit", "Inter", sans-serif',
+      'Hardcore realism core that overhauls Minecraft\'s combat physics, armor weight mechanics, and equipment traits for a brutal medieval survival experience.',
+    badge: 'Core',
+    fontFamily: '"Cinzel", "Lora", serif',
     fontImport:
-      'https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;700&display=swap',
+      'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&display=swap',
     colors: {
-      primary: '160, 84%, 39%', // Emerald Jade Green
-      primaryBg: '160, 20%, 7%', // Deep Forest Obsidian
-      primaryText: '160, 20%, 98%', // Mint Offwhite
-      secondaryText: '160, 15%, 75%', // Muted Mint
-      surface: '160, 20%, 12%', // Cards
-      border: '160, 84%, 39%', // Emerald Border
-      glow: '160, 84%, 39%',
-      shadow: '160, 80%, 10%',
+      primary: '15, 60%, 40%', // Blood Red / Rust Orange
+      primaryBg: '210, 5%, 8%', // Gritty Cold Iron Black
+      primaryText: '30, 20%, 90%', // Weathered Parchment White
+      secondaryText: '30, 10%, 70%', // Grimy Muted Stone
+      surface: '210, 5%, 12%', // Cold Dark Slate
+      border: '15, 50%, 35%', // Dark Rust Red Borders
+      glow: '15, 60%, 35%',
+      shadow: '0, 0%, 0%',
     },
     specs: {
-      version: 'v1.2.0',
-      loaders: ['Fabric', 'NeoForge'],
-      mcVersions: ['1.20.1', '1.20.4', '1.21.1'],
-      performance: 'Zero Overhead (Client-Side)',
-      focus: 'Quality of Life & HUD',
-      clientSideOnly: true,
-      dependencies: ['Fabric API', 'Cloth Config'],
+      version: 'v1.0.0',
+      loaders: ['Forge'],
+      mcVersions: ['1.20.1'],
+      performance: 'Throttled Events & Efficient Caching',
+      focus: 'Combat, Mechanics & Progression Realism',
     },
-    tags: ['Mod', 'QoL', 'Client-Side', 'HUD'],
-    pages: structureData['velocita-optimized'],
+    tags: ['Mod', 'Core', 'Realism', 'Combat'],
+    pages: structureData['aetas-ferrea-lib'],
   },
-  'bleck-pbr-overhaul': {
-    id: 'bleck-pbr-overhaul',
+  'aetas-ferrea-farmers-delight': {
+    id: 'aetas-ferrea-farmers-delight',
     type: 'resource-pack',
-    title: 'Bleck PBR Overhaul',
+    title: 'Aetas Ferrea - Farmer\'s Delight Integration',
     summary:
-      'A breathtaking 128x realistic texture suite featuring full LabPBR normal maps, specular reflections, and parallax occlusion mapping.',
-    badge: 'Hot',
-    fontFamily: '"Cinzel", "Outfit", sans-serif',
+      'An realistic texture pack similiar to patrix 32x, changing Farmer\'s Delight, used in Aetas Ferrea Modpack.',
+    fontFamily: '"Cinzel", "Lora", serif',
     fontImport:
-      'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Outfit:wght@400;500;700&display=swap',
+      'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&display=swap',
     colors: {
-      primary: '45, 93%, 47%', // Warm Amber Gold
-      primaryBg: '35, 20%, 8%', // Earthy Bronze Black
-      primaryText: '45, 20%, 98%', // Warm Sand White
-      secondaryText: '45, 15%, 75%', // Muted Bronze
-      surface: '35, 20%, 12%', // Cards
-      border: '45, 93%, 47%', // Golden Border
-      glow: '45, 93%, 47%',
-      shadow: '45, 80%, 10%',
+      primary: '15, 60%, 40%', // Blood Red / Rust Orange
+      primaryBg: '210, 5%, 8%', // Gritty Cold Iron Black
+      primaryText: '30, 20%, 90%', // Weathered Parchment White
+      secondaryText: '30, 10%, 70%', // Grimy Muted Stone
+      surface: '210, 5%, 12%', // Cold Dark Slate
+      border: '15, 50%, 35%', // Dark Rust Red Borders
+      glow: '15, 60%, 35%',
+      shadow: '0, 0%, 0%',
     },
     specs: {
-      version: 'v3.0.0',
-      mcVersions: ['1.20.1', '1.21', '1.21.1', '1.21.4'],
-      resolution: '128x',
-      performance: 'Requires PBR Shader Support',
-      focus: 'Realistic Normal Maps & Parallax',
-    },
-    tags: ['Resource Pack', '128x', 'PBR', 'Realistic'],
-    pages: structureData['velocita-optimized'],
-  },
-  'bleck-combat-style': {
-    id: 'bleck-combat-style',
-    type: 'mod',
-    title: 'Bleck Combat Style',
-    summary:
-      'An overhauled third-person melee combat system featuring fluid attack animations, precision weapon parrying, and dynamic poise mechanics.',
-    badge: 'Popular',
-    fontFamily: '"Outfit", "Inter", sans-serif',
-    fontImport:
-      'https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;700&display=swap',
-    colors: {
-      primary: '0, 80%, 55%', // Crimson Red
-      primaryBg: '0, 15%, 8%', // Dark Blood Black
-      primaryText: '0, 10%, 98%', // Off-white
-      secondaryText: '0, 10%, 75%', // Muted Pink-Gray
-      surface: '0, 15%, 12%', // Cards
-      border: '0, 80%, 55%', // Crimson Border
-      glow: '0, 80%, 55%',
-      shadow: '0, 80%, 10%',
-    },
-    specs: {
-      version: 'v2.1.0',
-      loaders: ['Fabric', 'Forge', 'NeoForge'],
-      mcVersions: ['1.20.1', '1.21.1'],
-      performance: 'Lightweight Animation Controller',
-      focus: 'Melee Combat Overhaul',
-    },
-    tags: ['Mod', 'Combat', 'Animations', 'PvE'],
-    pages: structureData['velocita-optimized'],
-  },
-  'bleck-metallurgy': {
-    id: 'bleck-metallurgy',
-    type: 'mod',
-    title: 'Bleck Metallurgy',
-    summary:
-      'Introduces 12 fantasy alloying ores, modular alloy smelting crucibles, and customized tool smithing with unique material traits.',
-    fontFamily: '"Cinzel", "Outfit", sans-serif',
-    fontImport:
-      'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Outfit:wght@400;500;700&display=swap',
-    colors: {
-      primary: '200, 80%, 50%', // Steel Blue / Cyan
-      primaryBg: '200, 15%, 8%', // Dark Steel Black
-      primaryText: '200, 10%, 98%', // Off-white
-      secondaryText: '200, 10%, 75%', // Muted Blue-Gray
-      surface: '200, 15%, 12%', // Cards
-      border: '200, 80%, 50%', // Cyan Border
-      glow: '200, 80%, 50%',
-      shadow: '200, 80%, 10%',
-    },
-    specs: {
-      version: 'v1.0.4',
-      loaders: ['Forge', 'NeoForge'],
-      mcVersions: ['1.20.1', '1.21.1'],
-      performance: 'Optimized World Generation',
-      focus: 'Ores, Alloys & Smithing',
-    },
-    tags: ['Mod', 'Ores', 'Smelting', 'Equipment'],
-    pages: structureData['velocita-optimized'],
-  },
-  'bleck-medical-realism': {
-    id: 'bleck-medical-realism',
-    type: 'resource-pack',
-    title: 'Bleck Medical Realism',
-    summary:
-      'A 32x immersive UI and audio overhaul for survival health systems, custom bandage textures, and detailed status effect icons.',
-    fontFamily: '"Outfit", "Inter", sans-serif',
-    fontImport:
-      'https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;700&display=swap',
-    colors: {
-      primary: '340, 80%, 60%', // Medical Pink / Rose
-      primaryBg: '340, 15%, 8%', // Dark Rose Black
-      primaryText: '340, 10%, 98%', // Crisp White
-      secondaryText: '340, 10%, 75%', // Muted Rose
-      surface: '340, 15%, 12%', // Cards
-      border: '340, 80%, 60%', // Rose Border
-      glow: '340, 80%, 60%',
-      shadow: '340, 80%, 10%',
-    },
-    specs: {
-      version: 'v1.1.0',
-      mcVersions: ['1.20.1', '1.21', '1.21.4'],
+      version: 'v1.0.0',
+      mcVersions: ['1.20.1'],
       resolution: '32x',
-      performance: 'Vanilla Compatible',
-      focus: 'UI, Health & Audio Overhaul',
+      performance: 'Quality Visuals with Moderate Optimization',
+      focus: 'Farmer\'s Delight Aesthetics',
     },
-    tags: ['Resource Pack', '32x', 'GUI', 'Audio'],
-    pages: structureData['velocita-optimized'],
+    tags: ['Resource Pack', '32x', 'PBR', 'Realistic'],
+    pages: structureData['aetas-ferrea-farmers-delight'],
+  },
+  'aetas-ferrea-spartan': {
+    id: 'aetas-ferrea-spartan',
+    type: 'resource-pack',
+    title: 'Aetas Ferrea - Spartan Integration',
+    summary:
+      'An realistic texture pack similiar to patrix 32x, changing spartan weaponary, used in Aetas Ferrea Modpack.',
+    fontFamily: '"Cinzel", "Lora", serif',
+    fontImport:
+      'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&display=swap',
+    colors: {
+      primary: '15, 60%, 40%', // Blood Red / Rust Orange
+      primaryBg: '210, 5%, 8%', // Gritty Cold Iron Black
+      primaryText: '30, 20%, 90%', // Weathered Parchment White
+      secondaryText: '30, 10%, 70%', // Grimy Muted Stone
+      surface: '210, 5%, 12%', // Cold Dark Slate
+      border: '15, 50%, 35%', // Dark Rust Red Borders
+      glow: '15, 60%, 35%',
+      shadow: '0, 0%, 0%',
+    },
+    specs: {
+      version: 'v1.0.0',
+      mcVersions: ['1.20.1'],
+      resolution: '32x',
+      performance: 'Requires PBR Shader Support',
+      focus: 'Spartan Weaponry Aesthetics',
+    },
+    tags: ['Resource Pack', '32x', 'PBR', 'Realistic'],
+    pages: structureData['aetas-ferrea-spartan'],
+  },
+  'aetas-ferrea-extras': {
+    id: 'aetas-ferrea-extras',
+    type: 'resource-pack',
+    title: 'Aetas Ferrea - Extras Integration',
+    summary:
+      'An realistic texture pack similiar to patrix 32x, changing some mods, used in Aetas Ferrea Modpack.',
+    fontFamily: '"Cinzel", "Lora", serif',
+    fontImport:
+      'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&display=swap',
+    colors: {
+      primary: '15, 60%, 40%', // Blood Red / Rust Orange
+      primaryBg: '210, 5%, 8%', // Gritty Cold Iron Black
+      primaryText: '30, 20%, 90%', // Weathered Parchment White
+      secondaryText: '30, 10%, 70%', // Grimy Muted Stone
+      surface: '210, 5%, 12%', // Cold Dark Slate
+      border: '15, 50%, 35%', // Dark Rust Red Borders
+      glow: '15, 60%, 35%',
+      shadow: '0, 0%, 0%',
+    },
+    specs: {
+      version: 'v1.0.0',
+      mcVersions: ['1.20.1'],
+      resolution: '32x',
+      performance: 'Quality Visuals with Moderate Optimization',
+      focus: 'Utility & Decorative Mods Aesthetics',
+    },
+    tags: ['Resource Pack', '32x', 'PBR', 'Realistic'],
+    pages: structureData['aetas-ferrea-extras'],
+  },
+  'aetas-ferrea-minecolonies': {
+    id: 'aetas-ferrea-minecolonies',
+    type: 'resource-pack',
+    title: 'Aetas Ferrea - MineColonies Integration',
+    summary:
+      'An realistic texture pack similiar to patrix 32x, changing MineColonies, used in Aetas Ferrea Modpack.',
+    fontFamily: '"Cinzel", "Lora", serif',
+    fontImport:
+      'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&display=swap',
+    colors: {
+      primary: '15, 60%, 40%', // Blood Red / Rust Orange
+      primaryBg: '210, 5%, 8%', // Gritty Cold Iron Black
+      primaryText: '30, 20%, 90%', // Weathered Parchment White
+      secondaryText: '30, 10%, 70%', // Grimy Muted Stone
+      surface: '210, 5%, 12%', // Cold Dark Slate
+      border: '15, 50%, 35%', // Dark Rust Red Borders
+      glow: '15, 60%, 35%',
+      shadow: '0, 0%, 0%',
+    },
+    specs: {
+      version: 'v1.0.0',
+      mcVersions: ['1.20.1'],
+      resolution: '32x',
+      performance: 'Quality Visuals with Moderate Optimization',
+      focus: 'MineColonies & Structurize Aesthetics',
+    },
+    tags: ['Resource Pack', '32x', 'PBR', 'Realistic'],
+    pages: structureData['aetas-ferrea-minecolonies'],
   },
 };
 

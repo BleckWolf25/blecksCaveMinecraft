@@ -1,7 +1,2 @@
-## 🧠 Advanced Predator AI & Fortress Sieges
-
-Monsters are no longer brainless. They will track the scent of your bleeding wounds from afar. They actively listen for the sound of you. Defend your base from organized sieges where hordes will dig through blocks, scale barriers, and deploy tactical measures to tear down your walls. Every-day you survive they'll grow stronger!
-
-## 🐉 Mythic Challenges & Exploration
-
-Explore a sprawling, custom-generated world featuring impossibly dense forests and ruined kingdoms. Hunt down extremely rare, terrifying mythical beasts that act as endgame world bosses for those brave enough to seek them out.
+### 👑 Nightfall Horrors & Nether Lords
+Creepers and witches have been permanently purged from this world, replaced by far more calculated threats. When night falls, elite progressive undead emerge to lay siege to your fortresses. You will encounter specialized commanders—some leading armored sapper squads that break through solid stone walls, others growing terrifyingly faster as their armor layers shatter in combat. For those brave enough to venture into the underworld, the Vanguard and the catastrophic Monarch guard the deep basalt and structures of the Nether.
