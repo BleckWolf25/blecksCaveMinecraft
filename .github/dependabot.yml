@@ -1,0 +1,55 @@
+version: 2
+updates:
+  # Enable version updates for npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "BleckWolf25"
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "chore(deps-dev)"
+      include: "scope"
+    groups:
+      production-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@types/*"
+          - "*eslint*"
+          - "*prettier*"
+          - "*vitest*"
+          - "*playwright*"
+      dev-dependencies:
+        patterns:
+          - "@types/*"
+          - "*eslint*"
+          - "*prettier*"
+          - "*vitest*"
+          - "*playwright*"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem:/github-actions
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "BleckWolf25"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"

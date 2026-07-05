@@ -26,5 +26,14 @@
 
     "types": ["@types/node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "tests/**/*.ts", "e2e/**/*.ts", "scripts/**/*.ts", "*.config.ts", "*.config.js", "eslint.config.js"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "tests/**/*.ts",
+    "e2e/**/*.ts",
+    "scripts/**/*.ts",
+    "*.config.ts",
+    "*.config.js",
+    "eslint.config.js"
+  ]
 }
