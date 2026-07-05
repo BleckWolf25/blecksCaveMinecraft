@@ -15,12 +15,14 @@
 **Q: I want to remove a specific mod, resource pack, or shader. Will this break the modpack?**
 
 **A:** Generally, removing mods, resource packs, or shaders is fine, but avoid removing essential libraries (there are only a few in this pack). Here’s how:
-* **Mods/Shaders:** Navigate to the mods or shaderpacks folder for the specific Minecraft version you are playing and delete the mod/shader you wish to remove.
-* **Resource Packs:** Go to Options -> Resource Packs in-game and move the unwanted pack to the "Available" section.
+
+- **Mods/Shaders:** Navigate to the mods or shaderpacks folder for the specific Minecraft version you are playing and delete the mod/shader you wish to remove.
+- **Resource Packs:** Go to Options -> Resource Packs in-game and move the unwanted pack to the "Available" section.
 
 **Q: The modpack doesn’t improve my game performance significantly. Why?**
 
 **A:** Here are three points to look for:
+
 1. While MCVT includes numerous performance mods, it doesn't guarantee a fixed FPS boost, especially on low-end PCs.
 2. The modpack is not solely focused on performance; it’s about balancing features and optimization.
 3. Check your video settings. If you're unfamiliar with certain terms or options, consider looking them up online.

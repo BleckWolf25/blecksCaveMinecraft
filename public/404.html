@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found | Bleck's Cave Wiki</title>
+    <link rel="icon" type="image/png" href="/blecks_cave.png" />
+    <style>
+      body {
+        background: #0a0a0a;
+        color: #fff;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 2rem;
+        text-align: center;
+      }
+      .container {
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 3rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+      h1 {
+        font-size: 3rem;
+        margin: 0 0 1rem;
+        color: #ff9900;
+      }
+      p {
+        color: #aaa;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      a {
+        display: inline-block;
+        background: #ff9900;
+        color: #000;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 0.8rem 1.75rem;
+        border-radius: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(255, 153, 0, 0.4);
+      }
+    </style>
+    <script>
+      // Single Page Application static routing redirect for GitHub Pages
+      sessionStorage.redirect = location.pathname;
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>404</h1>
+      <p>The universe or document page you are seeking does not exist in this realm, or has been relocated.</p>
+      <a href="/">Return to Portal</a>
+    </div>
+  </body>
+</html>

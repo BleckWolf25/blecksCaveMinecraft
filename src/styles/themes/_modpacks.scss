@@ -1,4 +1,25 @@
-@use "../abstracts/variables" as *;
+/*
+ * @file _modpacks.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Modpacks theme partial for Bleck's Cave Minecraft Wiki.
+ *
+ * @description:
+ * - Imports Sass abstracts (variables & mixins) first so every downstream
+ *   partial can safely use them via @use.
+ * - Follows the 7-1 Sass architecture pattern: abstracts → base →
+ *   components → themes.
+ * - Vite compiles this file natively via the installed `sass` package;
+ *   zero custom Vite config required.
+ *
+ * @since 02/06/2026
+ * @updated 02/06/2026
+ */
+/* ---------- ABSTRACTS ---------- */
+@use '../abstracts/variables' as *;
 
 // --------------------------------------------------------------------------
 // 1. Global Portal Hub Theme
@@ -12,7 +33,7 @@ body.theme-portal {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background-image: 
+    background-image:
       linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -33,14 +54,24 @@ body.theme-velocita-optimized {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 200, 0.05) 2px, rgba(0, 255, 200, 0.05) 4px);
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 200, 0.05) 2px,
+      rgba(0, 255, 200, 0.05) 4px
+    );
     pointer-events: none;
     animation: velocita-speed-lines 20s linear infinite;
   }
 
   @keyframes velocita-speed-lines {
-    from { background-position: 0 0; }
-    to { background-position: 0 1000px; }
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 1000px;
+    }
   }
 
   // Sidebar Overrides
@@ -80,7 +111,11 @@ body.theme-builder-plus-plus {
       linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
       linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-size:
+      100px 100px,
+      100px 100px,
+      20px 20px,
+      20px 20px;
     pointer-events: none;
   }
 
@@ -113,7 +148,13 @@ body.theme-better-than-pvp {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: repeating-linear-gradient(45deg, rgba(255, 0, 0, 0.02), rgba(255, 0, 0, 0.02) 10px, transparent 10px, transparent 20px);
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255, 0, 0, 0.02),
+      rgba(255, 0, 0, 0.02) 10px,
+      transparent 10px,
+      transparent 20px
+    );
     pointer-events: none;
   }
 
@@ -165,7 +206,9 @@ body.theme-aetas-ferrea {
     color: #d1c7b7;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: 'Times New Roman', Times, serif;
     letter-spacing: 1px;
   }
@@ -205,7 +248,9 @@ body.theme-mc-vanilla-tweaked {
       background: #5c8e32;
       border-color: #3b5e20;
       color: #fff;
-      box-shadow: inset 4px 4px 0 #2c4418, 4px 4px 0 #000;
+      box-shadow:
+        inset 4px 4px 0 #2c4418,
+        4px 4px 0 #000;
     }
 
     &:hover:not(.active) {

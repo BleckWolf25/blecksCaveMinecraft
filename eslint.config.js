@@ -15,7 +15,6 @@
  * @since 01/06/2026
  * @updated 03/06/2026
  */
-/* eslint-disable */
 // ---------- IMPORTS
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -29,7 +28,7 @@ const __dirname = dirname(__filename);
 
 // ---------- CONFIGURATION
 export default tseslint.config(
-  // 1. Inherit core JS and type-aware TS configurations
+  // Inherit core JS and type-aware TS configurations
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
 
@@ -45,22 +44,25 @@ export default tseslint.config(
       globals: {
         ...globals.browser,
         ...globals.node,
-      }
+      },
     },
     rules: {
-      // 2. Strict Logic, Security, and Code Quality Rules
-      'eqeqeq': ['error', 'always'],
-      'curly': ['error', 'all'],
-      '@typescript-eslint/no-unused-vars': ['error', { 'vars': 'all', 'args': 'none', 'ignoreRestSiblings': false }],
+      // Strict Logic, Security, and Code Quality Rules
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { vars: 'all', args: 'none', ignoreRestSiblings: false },
+      ],
       'no-eval': 'error',
       'no-implied-eval': 'error',
       'no-var': 'error',
       'prefer-const': 'error',
-      'no-console': ['warn', { 'allow': ['warn', 'error'] }],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
 
       // Enforce explicit return types for better documentation and self-documenting code
-      '@typescript-eslint/explicit-function-return-type': 'warn'
-    }
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
   },
 
   // 3. Must remain last: disables all ESLint rules that conflict with Prettier

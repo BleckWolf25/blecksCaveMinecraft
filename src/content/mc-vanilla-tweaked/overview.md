@@ -8,7 +8,7 @@ This modpack is highly modifiable and works seamlessly with vanilla servers, mak
 
 ## Why Choose MCVT?
 
-* **Customizable:** Choose what you’re after for, pure performance boosts or/and new features.
-* **Future support for Older Versions:** Play your favorite Minecraft versions with modern optimizations and features (within compatibility & version limits).
+- **Customizable:** Choose what you’re after for, pure performance boosts or/and new features.
+- **Future support for Older Versions:** Play your favorite Minecraft versions with modern optimizations and features (within compatibility & version limits).
 
 > ### NOTE: I DON'T OWN ANY OF THE MODPACK MODS!!!

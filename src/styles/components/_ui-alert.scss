@@ -1,6 +1,24 @@
-@use "../abstracts/variables" as *;
+/*
+ * @file _ui-alert.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Interactive markdown callout alert box styles for wiki articles.
+ *
+ * @description:
+ * - Styles interactive callout boxes rendered within parsed markdown content.
+ * - Formats distinct visual alert variants including tip, info, warning, and danger.
+ * - Applies themed background overlays and colored left border indicators.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
+@use '../abstracts/variables' as *;
 
-// Interactive Callout alert boxes inside wiki parsed markdown
+/* ---------- WIKI CALLOUT BOXES ---------- */
 .wiki-callout {
   background: hsla(var(--surface), 0.8);
   border-left: 4px solid hsl(var(--primary));
@@ -14,7 +32,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    
+
     svg {
       flex-shrink: 0;
     }
@@ -28,46 +46,47 @@
     color: hsl(var(--secondary-text));
   }
 
-  // 1. Note Alert (Uses primary theme colors)
-  &.note-alert, &.info-alert {
+  /* ---------- NOTE & INFO ALERTS ---------- */
+  &.note-alert,
+  &.info-alert {
     border-left-color: hsl(var(--primary));
     background: hsla(var(--surface), 0.5);
     @include border-glow(--primary, 0.1, 10px);
-    
+
     h4 {
       color: hsl(var(--primary));
     }
   }
 
-  // 2. Important Alert (Vibrant Orange Accent)
+  /* ---------- IMPORTANT ALERT ---------- */
   &.important-alert {
     border-left-color: hsl(30, 100%, 50%);
     background: hsla(30, 20%, 8%, 0.6);
     box-shadow: 0 0 10px hsla(30, 100%, 50%, 0.1);
-    
+
     h4 {
       color: hsl(30, 100%, 50%);
     }
   }
 
-  // 3. Warning Alert (Crimson / Fiery Red Accent)
+  /* ---------- WARNING ALERT ---------- */
   &.warning-alert {
     border-left-color: hsl(355, 100%, 50%);
     background: hsla(355, 20%, 8%, 0.6);
     box-shadow: 0 0 10px hsla(355, 100%, 50%, 0.1);
-    
+
     h4 {
       color: hsl(355, 100%, 50%);
     }
   }
 
-  // 4. Chronicles Thematic alert
+  /* ---------- MEDIEVAL / CHRONICLES ALERT ---------- */
   &.medieval-alert {
     border: 2px solid hsl(15, 60%, 20%);
     border-left: 6px solid hsl(15, 60%, 40%);
     background: #1a1714;
     font-family: 'Lora', serif;
-    
+
     h4 {
       color: hsl(15, 60%, 50%);
       font-family: 'Cinzel', serif;

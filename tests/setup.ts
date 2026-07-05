@@ -1,6 +1,22 @@
+/**
+ * @file setup.ts
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Global test environment initialization and browser API stubs.
+ *
+ * @description
+ * Sets up global stubs for browser APIs not natively implemented in jsdom during test execution, including Web Audio API stubs for UI sound feedback testing and View Transitions API polyfills for smooth navigation testing.
+ *
+ * @since 25/06/2026
+ * @updated 04/07/2026
+ */
+// ---------- IMPORTS
 import { vi } from 'vitest';
 
-// Mock Web Audio API
+// ---------- WEB AUDIO API MOCKS
 class MockAudioContext {
   currentTime = 0;
   destination = {};
@@ -29,10 +45,11 @@ class MockAudioContext {
   }
 }
 
+// ---------- GLOBAL AUDIO STUBS REGISTRATION
 vi.stubGlobal('AudioContext', MockAudioContext);
 vi.stubGlobal('webkitAudioContext', MockAudioContext);
 
-// Mock native View Transitions API
+// ---------- VIEW TRANSITIONS API MOCKS
 if (typeof document !== 'undefined') {
   document.startViewTransition = (callback: () => void) => {
     callback();

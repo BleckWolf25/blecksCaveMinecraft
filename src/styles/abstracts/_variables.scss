@@ -1,8 +1,25 @@
-// Global Transitions & Animations Variables
+/*
+ * @file _variables.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Central SCSS abstracts containing design system variables and mixins.
+ *
+ * @description:
+ * - Defines global transition animations, easing curves, and timing tokens.
+ * - Establishes reusable visual mixins for glassmorphism panels, text glows,
+ *   and border glow effects used throughout the UI.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- TRANSITIONS & ANIMATION TOKENS ---------- */
 $transition-speed: 0.5s;
 $transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
 
-// Standard CSS variables mapped into dynamic Sass tokens
+/* ---------- DYNAMIC THEME TRANSITIONS ---------- */
 $theme-transition: background-color #{$transition-speed} #{$transition-bezier},
   color #{$transition-speed} #{$transition-bezier},
   border-color #{$transition-speed} #{$transition-bezier},
@@ -10,7 +27,7 @@ $theme-transition: background-color #{$transition-speed} #{$transition-bezier},
   text-shadow #{$transition-speed} #{$transition-bezier},
   transform #{$transition-speed} #{$transition-bezier};
 
-// Reusable Mixins for Visual Premium Effects
+/* ---------- REUSABLE VISUAL MIXINS ---------- */
 @mixin glass-panel($bg-opacity: 0.6, $blur: 12px) {
   background: hsla(var(--surface), #{$bg-opacity});
   backdrop-filter: blur(#{$blur});

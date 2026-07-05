@@ -27,6 +27,7 @@
 **Q. I have a beefy PC, but my game still lags or stutters.**
 
 **A.** Try the following steps to improve performance:
+
 1. Make sure your Render and Simulation Distances aren't set too high (quality presets).
 2. Try disabling or removing the **Subtle Effects** mod.
 3. Lower your overall graphics settings to "Fast".

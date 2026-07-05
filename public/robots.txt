@@ -1,0 +1,7 @@
+# www.robotstxt.org/
+# Allow all search engines and web crawlers to index the portal and documentation wiki
+User-agent: *
+Allow: /
+
+# Point crawlers to the automated XML sitemap
+Sitemap: https://bleckscaveminecraft.wiki/sitemap.xml

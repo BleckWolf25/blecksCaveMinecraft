@@ -1,6 +1,24 @@
+/*
+ * @file _navigation.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Top navigation bar, brand logo display, and theme switcher dropdown styles.
+ *
+ * @description:
+ * - Styles the sticky top navigation bar with glassmorphism backdrop blur.
+ * - Formats the brand logo and name layout.
+ * - Configures the interactive modpack/theme switcher dropdown menu and trigger button.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
 @use "../abstracts/variables" as *;
 
-// Sticky navigation top bar styling
+/* ---------- STICKY TOP BAR ---------- */
 .nav-bar {
   position: sticky;
   top: 0;
@@ -16,18 +34,30 @@
   justify-content: space-between;
   padding: 0 3rem;
   transition: $theme-transition;
+
+  @media (max-width: 768px) {
+    padding: 0 1.25rem;
+  }
 }
 
+/* ---------- BRAND IDENTIFIER ---------- */
 .nav-brand {
   display: flex;
   align-items: center;
   gap: 1rem;
   cursor: pointer;
 
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
+
   .nav-brand-logo {
-    font-size: 1.5rem;
-    color: hsl(var(--primary));
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
     filter: drop-shadow(0 0 8px hsla(var(--primary), 0.5));
+    transition: transform 0.2s ease, filter 0.2s ease;
   }
 
   .nav-brand-name {
@@ -36,14 +66,19 @@
     letter-spacing: -0.5px;
     text-transform: uppercase;
     color: #fff;
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 }
 
-// Custom selector dropdown trigger inside navigation
+/* ---------- PROJECT SWITCHER CONTAINER ---------- */
 .nav-switcher-container {
   position: relative;
 }
 
+/* ---------- SWITCHER BUTTON ---------- */
 .nav-switcher-btn {
   background: hsla(var(--surface), 0.6);
   border: 1px solid hsla(var(--border), 0.2);
@@ -58,12 +93,18 @@
   cursor: pointer;
   transition: $theme-transition;
 
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
   &:hover {
     background: hsla(var(--surface), 0.9);
     border-color: hsl(var(--primary));
   }
 }
 
+/* ---------- SWITCHER DROPDOWN MENU ---------- */
 .nav-switcher-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -84,6 +125,7 @@
   }
 }
 
+/* ---------- DROPDOWN ANIMATIONS ---------- */
 @keyframes dropdown-fade-in {
   from {
     opacity: 0;
@@ -95,6 +137,7 @@
   }
 }
 
+/* ---------- DROPDOWN ITEMS ---------- */
 .dropdown-item {
   padding: 0.75rem 1.25rem;
   display: flex;

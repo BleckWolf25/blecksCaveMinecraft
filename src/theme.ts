@@ -1,6 +1,23 @@
+/**
+ * @file theme.ts
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Theme management functions.
+ *
+ * @description
+ * Manages dynamic visual theming across the application, handling asynchronous loading of Google Font stylesheets, injecting HSL color tokens as custom CSS variables on the root document, and applying scoping class names and data attributes to the body element.
+ *
+ * @since 25/06/2026
+ * @updated 04/07/2026
+ */
+// ---------- IMPORTS
 import { globalPortalTheme, modpacks } from './wiki-data.ts';
 import { ThemeConfig, Modpack } from './types.ts';
 
+// ---------- FONT LOADING
 /**
  * Loads a Google Font dynamically by appending or modifying a link tag in the document head.
  * @param {string} fontImportUrl - The URL of the Google Font to import.
@@ -10,6 +27,7 @@ function loadGoogleFont(fontImportUrl: string, _themeId: string): void {
   const linkId = 'theme-google-font';
   let fontLink = document.getElementById(linkId) as HTMLLinkElement | null;
 
+  // Create stylesheet link element if it has not been mounted in document head yet
   if (!fontLink) {
     fontLink = document.createElement('link');
     fontLink.id = linkId;
@@ -17,12 +35,13 @@ function loadGoogleFont(fontImportUrl: string, _themeId: string): void {
     document.head.appendChild(fontLink);
   }
 
-  // Only update if the URL has changed to prevent redraw flickering
+  // Check existing href before reassigning to prevent redundant network requests and layout shifts
   if (fontLink.href !== fontImportUrl) {
     fontLink.href = fontImportUrl;
   }
 }
 
+// ---------- THEME TOKEN INJECTION
 /**
  * Injects a given theme's design tokens into the :root CSS variables.
  * @param {ThemeConfig | Modpack} theme - The theme configuration object.
@@ -31,35 +50,37 @@ export function applyTheme(theme: ThemeConfig | Modpack): void {
   const root = document.documentElement;
   const body = document.body;
 
-  // 1. Dynamic Font Injection
+  // ---------- FONT INJECTION (load stylesheet if configured)
+  // Request typography stylesheet prior to updating font family CSS custom property
   if (theme.fontImport) {
     loadGoogleFont(theme.fontImport, theme.id);
   }
 
-  // 2. Set CSS custom properties on :root
+  // ---------- VARIABLE BINDING (map camelCase keys to kebab-case CSS properties)
+  // Bind primary font family token directly to document root
   root.style.setProperty('--font-family', theme.fontFamily);
 
+  // Convert HSL token map into CSS variables for stylesheet consumption
   Object.entries(theme.colors).forEach(([key, HslValue]) => {
-    // We convert HslValue keys (like primaryBg -> --primary-bg)
     const cssVariableName = `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
-    root.style.setProperty(cssVariableName, HslValue);
+    root.style.setProperty(cssVariableName, String(HslValue));
   });
 
-  // 3. Update body theme classes to trigger custom animations/effects
-  // First, remove any existing theme classes
-  Array.from(body.classList).forEach(className => {
+  // ---------- CLASS CLEANUP (remove prior theme selector classes)
+  // Strip previous theme scoping classes to avoid style collisions across transitions
+  Array.from(body.classList).forEach((className) => {
     if (className.startsWith('theme-')) {
       body.classList.remove(className);
     }
   });
 
-  // Add current theme class
+  // ---------- ATTRIBUTE SETTING (apply new theme class and data attribute)
+  // Attach new scoping class and dataset property for stylesheet selector specificity
   body.classList.add(`theme-${theme.id}`);
-
-  // Set data attribute for global selector targeting
   body.setAttribute('data-theme', theme.id);
 }
 
+// ---------- THEME RESOLUTION
 /**
  * Switches theme by modpack ID. Falls back to global portal theme if id is 'portal' or not found.
  * @param {string} modpackId - The ID of the modpack.
@@ -69,6 +90,7 @@ export function switchTheme(modpackId: string): void {
   if (modpack) {
     applyTheme(modpack);
   } else {
+    // Revert to global portal styling when project ID is unrecognized or explicitly reset
     applyTheme(globalPortalTheme);
   }
 }

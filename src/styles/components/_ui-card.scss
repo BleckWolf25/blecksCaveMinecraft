@@ -1,6 +1,26 @@
+/*
+ * @file _ui-card.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Project preview cards, interactive hover states, badges, and featured hero card styles.
+ *
+ * @description:
+ * - Styles standard project catalog grid cards with dynamic HSL glow borders.
+ * - Formats interactive hover transitions, card icons, headings, and action arrows.
+ * - Establishes category tags, archive labels, and status badge overlays.
+ * - Configures expanded layout styling for the spotlight featured hero project.
+ * - Controls responsive grid card adaptation across mobile and tablet viewports.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
 @use "../abstracts/variables" as *;
 
-// Reusable Modpack Grid Cards & Featured Hero Cards styling
+/* ---------- MODPACK & PROJECT GRID CARDS ---------- */
 .modpack-card {
   background: #0a0a0a;
   border: 2px solid #333;
@@ -13,7 +33,13 @@
   overflow: hidden;
   height: 380px;
   box-shadow: 4px 4px 0 #333;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  @media (max-width: 640px) {
+    height: auto;
+    min-height: 320px;
+    padding: 2rem 1.5rem;
+  }
 
   &::before {
     content: '';
@@ -22,13 +48,13 @@
     background: hsl(var(--card-primary));
     opacity: 0;
     z-index: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   &:hover {
-    transform: translate(-4px, -4px);
+    transform: translate(-6px, -6px);
     border-color: hsl(var(--card-primary));
-    box-shadow: 8px 8px 0 hsl(var(--card-primary));
+    box-shadow: 10px 10px 0 hsl(var(--card-primary)), 0 12px 30px hsla(var(--card-primary), 0.25);
 
     &::before {
       opacity: 0.1;
@@ -37,6 +63,7 @@
     .card-icon {
       background: hsl(var(--card-primary));
       color: #000;
+      transform: scale(1.1) rotate(4deg);
     }
 
     .card-title {
@@ -47,19 +74,77 @@
       background: hsl(var(--card-primary));
       border-color: hsl(var(--card-primary));
       color: #000;
-      transform: translateX(4px);
+      transform: translateX(6px) scale(1.1);
     }
   }
 
   &.archived {
     border-style: dashed;
   }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--card-primary));
+    outline-offset: 4px;
+  }
 }
 
-.archive-badge-portal {
+/* ---------- CARD BADGES & TAGS ---------- */
+.card-badges {
   position: absolute;
   top: 15px;
   right: 15px;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  z-index: 3;
+}
+
+.category-badge-portal {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: hsla(var(--surface), 0.8);
+  color: #fff;
+  border: 1px solid hsla(var(--border), 0.4);
+
+  &.type-modpack {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  &.type-mod {
+    border-color: hsl(190, 80%, 60%);
+    color: hsl(190, 80%, 60%);
+  }
+
+  &.type-resource-pack {
+    border-color: hsl(280, 70%, 65%);
+    color: hsl(280, 70%, 65%);
+  }
+
+  &.type-shader {
+    border-color: hsl(140, 70%, 55%);
+    color: hsl(140, 70%, 55%);
+  }
+}
+
+.status-badge-portal {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: hsla(var(--primary), 0.15);
+  color: hsl(var(--primary));
+  border: 1px solid hsla(var(--primary), 0.4);
+}
+
+.archive-badge-portal {
+  position: static;
   font-size: 0.65rem;
   font-weight: 800;
   background: rgba(255, 165, 0, 0.15);
@@ -71,6 +156,7 @@
   letter-spacing: 1px;
 }
 
+/* ---------- CARD CONTENT LAYOUT ---------- */
 .card-header {
   position: relative;
   z-index: 2;
@@ -87,7 +173,7 @@
   color: hsl(var(--card-primary));
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card-title {
@@ -96,6 +182,10 @@
   margin-bottom: 1rem;
   color: #fff;
   transition: $theme-transition;
+
+  @media (max-width: 640px) {
+    font-size: 1.35rem;
+  }
 }
 
 .card-summary {
@@ -129,12 +219,10 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-// --------------------------------------------------------------------------
-// Featured Portal Hero (Aetas Ferrea Card Specific Styles)
-// --------------------------------------------------------------------------
+/* ---------- FEATURED PORTAL HERO (SPOTLIGHT CARD) ---------- */
 .portal-hero-section {
   width: 100%;
   margin-bottom: 4rem;
@@ -149,6 +237,23 @@
   padding: 5rem 4rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 992px) {
+    min-height: 400px;
+    padding: 3rem 2rem;
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    height: auto;
+    padding: 2.25rem 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    min-height: auto;
+    height: auto;
+    padding: 2rem 1.25rem;
+  }
   justify-content: center;
   align-items: flex-start;
   position: relative;
@@ -156,6 +261,7 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  animation: aetas-fire-glow-featured 5s infinite ease-in-out;
 
   &::before {
     content: '';
@@ -176,6 +282,7 @@
     transform: translateY(-8px);
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 1), 0 0 40px hsla(15, 60%, 40%, 0.3);
     border-color: hsl(15, 60%, 40%);
+    animation: none;
 
     &::before {
       opacity: 1; // Preserve solid overlay
@@ -194,6 +301,10 @@
     background: transparent;
     padding: 0;
     margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 1.25rem;
+    }
   }
 
   .card-icon {
@@ -209,10 +320,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 768px) {
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
   }
 
   .card-title {
-    font-size: 4rem;
+    font-size: clamp(2rem, 6.5vw, 4rem);
     font-family: 'Times New Roman', Times, serif;
     color: #fff;
     margin-bottom: 1rem;
@@ -227,6 +346,11 @@
     line-height: 1.7;
     margin-bottom: 0;
     text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
   }
 
   .card-footer {
@@ -262,6 +386,12 @@
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
 
+    @media (max-width: 768px) {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      margin-top: 1.25rem;
+    }
+
     &::after {
       content: ' Enter Kingdom →';
     }
@@ -269,5 +399,38 @@
     svg {
       display: none;
     }
+  }
+}
+
+/* ---------- FORGE FIRE-GLOW ANIMATIONS ---------- */
+.modpack-card[data-pack-id="aetas-ferrea"] {
+  animation: aetas-fire-glow-grid 6s infinite ease-in-out;
+
+  &:hover {
+    animation: none;
+  }
+}
+
+@keyframes aetas-fire-glow-featured {
+  0%, 100% {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 15px hsla(15, 80%, 40%, 0.15);
+    border-color: hsl(15, 60%, 20%);
+    border-left-color: hsl(15, 60%, 40%);
+  }
+  50% {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 35px hsla(25, 90%, 55%, 0.45);
+    border-color: hsl(20, 80%, 40%);
+    border-left-color: hsl(25, 90%, 55%);
+  }
+}
+
+@keyframes aetas-fire-glow-grid {
+  0%, 100% {
+    box-shadow: 4px 4px 0 #333, 0 0 10px hsla(15, 80%, 40%, 0.1);
+    border-color: #333;
+  }
+  50% {
+    box-shadow: 4px 4px 0 #333, 0 0 25px hsla(25, 90%, 55%, 0.35);
+    border-color: hsl(20, 80%, 40%);
   }
 }

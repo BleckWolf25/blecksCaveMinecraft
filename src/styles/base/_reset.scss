@@ -1,5 +1,25 @@
+/*
+ * @file _reset.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Global CSS reset, document root variables, and base typography styles.
+ *
+ * @description:
+ * - Establishes default theme tokens and CSS custom properties in :root.
+ * - Applies a universal box-sizing reset and strips default margin/padding.
+ * - Styles base body typography, selection highlights, and webkit scrollbars.
+ * - Provides full-screen liquid transition overlay styles for theme switching.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
 @use "../abstracts/variables" as *;
 
+/* ---------- ROOT THEME VARIABLES ---------- */
 :root {
   /* Default Theme Tokens (Fallback to Portal Theme) */
   --font-family: 'Outfit', sans-serif;
@@ -18,12 +38,14 @@
   --theme-transition: #{$theme-transition};
 }
 
+/* ---------- UNIVERSAL RESET ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* ---------- BASE DOCUMENT & BODY ---------- */
 body {
   font-family: var(--font-family);
   background-color: hsl(var(--primary-bg));
@@ -34,29 +56,43 @@ body {
   transition: var(--theme-transition);
 }
 
-// Custom Scrollbars
+::selection {
+  background: hsla(var(--primary), 0.3);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* ---------- TEXT SELECTION & SCROLLBARS ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(var(--primary-text), 0.2) transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--primary-bg));
-  transition: var(--theme-transition);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsla(var(--primary), 0.3);
-  border-radius: 5px;
-  border: 2px solid hsl(var(--primary-bg));
-  transition: var(--theme-transition);
+  background: hsla(var(--primary-text), 0.2);
+  border-radius: 3px;
+  border: none;
+  transition: background 0.2s ease;
 
   &:hover {
-    background: hsl(var(--primary));
+    background: hsla(var(--primary), 0.5);
   }
 }
 
-// Base Typography
+/* ---------- BASE TYPOGRAPHY ---------- */
 a {
   color: hsl(var(--primary));
   text-decoration: none;
@@ -67,7 +103,7 @@ a {
   }
 }
 
-// Transition Wipe Screen System (Liquid Swipes)
+/* ---------- THEME TRANSITION OVERLAYS ---------- */
 .theme-transition-overlay {
   position: fixed;
   inset: 0;
@@ -87,4 +123,108 @@ a {
     transform: scaleY(0);
     transform-origin: bottom;
   }
+}
+
+/* ---------- TV / DOCKING SCREEN OPTIMIZATIONS ---------- */
+.device-tv {
+  html {
+    font-size: 130% !important; // Scales root to 20.8px base for smart TV viewports
+  }
+
+  // TV focus indicators (highly visible from a distance)
+  :focus-visible,
+  .ui-btn:focus-visible,
+  .modpack-card:focus-visible,
+  .category-tab-btn:focus-visible {
+    outline: 4px solid hsl(var(--primary)) !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 25px hsla(var(--primary), 0.75) !important;
+  }
+
+  // Header and Sidebar spacing scale-up for TV
+  .nav-bar {
+    height: 90px !important;
+    padding: 0 4rem !important;
+  }
+  .nav-brand-logo {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .nav-brand-name {
+    font-size: 1.4rem !important;
+  }
+  .nav-switcher-btn {
+    padding: 0.75rem 1.75rem !important;
+    font-size: 1.1rem !important;
+  }
+  .wiki-sidebar {
+    width: 380px !important;
+    top: 90px !important;
+    height: calc(100vh - 90px) !important;
+  }
+  .wiki-specs-panel {
+    width: 360px !important;
+    top: 90px !important;
+    height: calc(100vh - 90px) !important;
+  }
+  .wiki-content-panel {
+    padding: 5rem 6rem !important;
+    max-width: 1000px !important;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 130% !important; // Scales root to 20.8px base for high-res television viewports
+  }
+
+  // TV focus indicators (highly visible from a distance)
+  :focus-visible,
+  .ui-btn:focus-visible,
+  .modpack-card:focus-visible,
+  .category-tab-btn:focus-visible {
+    outline: 4px solid hsl(var(--primary)) !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 25px hsla(var(--primary), 0.75) !important;
+  }
+
+  // Header and Sidebar spacing scale-up for TV
+  .nav-bar {
+    height: 90px !important;
+    padding: 0 4rem !important;
+  }
+  .nav-brand-logo {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .nav-brand-name {
+    font-size: 1.4rem !important;
+  }
+  .nav-switcher-btn {
+    padding: 0.75rem 1.75rem !important;
+    font-size: 1.1rem !important;
+  }
+  .wiki-sidebar {
+    width: 380px !important;
+    top: 90px !important;
+    height: calc(100vh - 90px) !important;
+  }
+  .wiki-specs-panel {
+    width: 360px !important;
+    top: 90px !important;
+    height: calc(100vh - 90px) !important;
+  }
+  .wiki-content-panel {
+    padding: 5rem 6rem !important;
+    max-width: 1000px !important;
+  }
+}
+
+/* Focus styles for scrollable columns in TV mode */
+.wiki-sidebar:focus-visible,
+.wiki-content-panel:focus-visible,
+.wiki-specs-panel:focus-visible {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: -3px !important;
+  box-shadow: inset 0 0 25px hsla(var(--primary), 0.3) !important;
 }

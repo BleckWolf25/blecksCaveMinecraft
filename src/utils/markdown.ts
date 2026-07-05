@@ -1,11 +1,27 @@
+/**
+ * @file markdown.ts
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Custom markdown parser, syntax highliter, and DOM sanitation pipeline.
+ *
+ * @description
+ * Configures the 'marked' renderer with custom rules for code blocks with clipboard copy utilities, responsive image lightboxes, themed tables, and GitHub-style callout alerts, sanitizing the resulting HTML with DOMPurify to prevent XSS vulnerabilities.
+ *
+ * @since 25/06/2026
+ * @updated 04/07/2026
+ */
+// ---------- IMPORTS
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import { Alert } from '../components/ui/Alert.ts';
 
-// Customize marked renderer to match our previous custom UI features
+// ---------- MARKED RENDERER CONFIGURATION
 const renderer = new marked.Renderer();
 
-// Custom code blocks with copy buttons
+// ---------- CUSTOM CODE BLOCKS (inject clipboard copy button and language markup)
 renderer.code = function({ text, lang, escaped }) {
   const codeText = escaped ? text : escapeHtml(text);
   return `
@@ -21,42 +37,43 @@ renderer.code = function({ text, lang, escaped }) {
   `;
 };
 
-// Custom images with lightbox
+// ---------- CUSTOM LINKS & IMAGES (enforce external link target and lightbox bindings)
+renderer.link = function({ href, title, text }) {
+  const target = href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
+  const titleAttr = title ? ` title="${title}"` : '';
+  return `<a href="${href}"${target}${titleAttr}>${text}</a>`;
+};
+
 renderer.image = function({ href, title, text }) {
   return `<img src="${href}" alt="${text || ''}" title="${title || ''}" data-lightbox="true" class="wiki-inline-img" style="max-width:100%; border-radius:10px; margin: 1rem 0; box-shadow:0 5px 15px rgba(0,0,0,0.3); cursor: zoom-in;" />`;
 };
 
-// Custom tables with styling
+// ---------- CUSTOM TABLES (build themed responsive table containers)
 renderer.table = function(token) {
-  // We need to render the table rows and headers
   let headerHtml = '';
   if (token.header.length > 0) {
-    headerHtml += '<thead style="border-bottom:2px solid hsla(var(--primary), 0.3); background:hsla(var(--surface), 0.8);"><tr>';
+    headerHtml += '<thead><tr>';
     token.header.forEach(cell => {
-      headerHtml += `<th style="padding:1rem; font-weight:700; color:#fff; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.5px;">${marked.parseInline(cell.text)}</th>`;
+      headerHtml += `<th>${marked.parseInline(cell.text) as string}</th>`;
     });
     headerHtml += '</tr></thead>';
   }
 
   let bodyHtml = '<tbody>';
   token.rows.forEach((row, rIdx) => {
-    const isOdd = rIdx % 2 !== 0;
-    const rowBg = isOdd ? 'hsla(var(--surface), 0.4)' : 'transparent';
-    bodyHtml += `<tr style="border-bottom:1px solid hsla(var(--border), 0.1); background:${rowBg}; transition: background 0.2s ease;">`;
+    bodyHtml += `<tr>`;
     row.forEach(cell => {
-      bodyHtml += `<td style="padding:1rem; font-size:0.95rem; color:hsl(var(--secondary-text));">${marked.parseInline(cell.text)}</td>`;
+      bodyHtml += `<td>${marked.parseInline(cell.text) as string}</td>`;
     });
     bodyHtml += '</tr>';
   });
   bodyHtml += '</tbody>';
 
-  return `<div style="overflow-x:auto; margin:2rem 0; box-shadow:0 4px 12px rgba(0,0,0,0.25); border-radius:12px;"><table style="width:100%; border-collapse:collapse; text-align:left; background:hsla(var(--surface), 0.6);">${headerHtml}${bodyHtml}</table></div>`;
+  return `<div class="wiki-table-container"><table>${headerHtml}${bodyHtml}</table></div>`;
 };
 
-// Custom blockquotes (GitHub alerts & Medieval fallbacks)
+// ---------- CUSTOM BLOCKQUOTES & ALERTS (parse GitHub alert prefixes and medieval callout styles)
 renderer.blockquote = function({ tokens }) {
-  // Get raw text to check for alert prefixes
-  // We have to extract the text from the tokens since blockquote gives us block tokens
   let contentHtml = '';
   let rawText = '';
   
@@ -64,7 +81,6 @@ renderer.blockquote = function({ tokens }) {
     if (token.type === 'paragraph') {
       rawText += token.raw + ' ';
     }
-    // We re-parse without blockquotes to avoid infinite loops
     contentHtml += marked.parser([token]);
   });
 
@@ -83,7 +99,6 @@ renderer.blockquote = function({ tokens }) {
     return Alert({ type: 'warning', htmlContent }).outerHTML;
   }
 
-  // Standard medieval fallback alert tags
   if (contentLower.includes('sanguis et ferrum') || contentLower.includes('natura non contristatur')) {
     return Alert({ type: 'medieval', htmlContent: contentHtml }).outerHTML;
   }
@@ -93,6 +108,7 @@ renderer.blockquote = function({ tokens }) {
 
 marked.use({ renderer });
 
+// ---------- MARKDOWN COMPILATION & SANITIZATION API
 /**
  * Escapes HTML tag characters to prevent script injection.
  * @param {string} text - Raw string.
@@ -114,18 +130,19 @@ function escapeHtml(text: string): string {
  * @returns {string} The compiled HTML string.
  */
 export function compileMarkdown(markdown: string): string {
+  // ---------- GUARD CLAUSE (return empty string for empty input)
   if (!markdown) {
     return '';
   }
 
-  const rawHtml = marked.parse(markdown, { async: false }) as string;
+  // ---------- PARSING & DOM SANITIZATION (filter unsafe tags and attributes)
+  const rawHtml = marked.parse(markdown, { async: false });
   const cleanHtml = DOMPurify.sanitize(rawHtml, {
-    // allow our custom inline styles added by the marked renderer
     ALLOWED_TAGS: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
       'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
       'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'img',
       'span', 'details', 'summary', 'button', 'svg', 'rect', 'path'],
-    ALLOWED_ATTR: ['href', 'name', 'target', 'src', 'alt', 'class', 'style', 'data-lightbox',
+    ALLOWED_ATTR: ['href', 'name', 'target', 'rel', 'src', 'alt', 'class', 'data-lightbox',
       'aria-label', 'width', 'height', 'viewBox', 'fill', 'stroke', 'stroke-width',
       'x', 'y', 'rx', 'ry', 'd'],
     FORBID_TAGS: ['script', 'style'],

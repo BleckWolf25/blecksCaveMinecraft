@@ -16,4 +16,4 @@ This is a temporary roadmap. Future project tracking and development milestones 
 
 Thanks to all the mod, resource pack, and shaders creators! Otherwise creating such a modpack would have been impossible!
 
-*All shaders have been configured to ensure a completely level playing field. Whether you play with shaders enabled or disabled, there are absolutely ZERO competitive advantages (no glowing ores).*
+_All shaders have been configured to ensure a completely level playing field. Whether you play with shaders enabled or disabled, there are absolutely ZERO competitive advantages (no glowing ores)._

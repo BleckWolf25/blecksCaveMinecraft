@@ -1,0 +1,25 @@
+{
+  "name": "Bleck's Cave Minecraft Wiki & Portal",
+  "short_name": "Bleck's Wiki",
+  "description": "The ultimate high-fidelity theme-morphing wiki guide and portal for custom Minecraft universes created by Bleckwolf25, including Velocita Optimized, Builder++, BetterThanPVP, and Aetas Ferrea.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "any",
+  "categories": ["games", "utilities", "entertainment"],
+  "icons": [
+    {
+      "src": "/blecks_cave.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/blecks_cave.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

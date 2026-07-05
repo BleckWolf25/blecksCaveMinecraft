@@ -1,10 +1,26 @@
-@use "../abstracts/variables" as *;
+/*
+ * @file _portal.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Layout, hero header, category tabs, filtering controls, and card grid styles for the Project Universe portal.
+ *
+ * @description:
+ * - Establishes responsive container bounds and padding for the main landing page.
+ * - Formats the hero banner title, glowing underlines, and descriptive subtitle.
+ * - Styles category navigation tabs with live item count badges and interactive feedback.
+ * - Configures multi-select filter groups, pills, archived toggle checkboxes, and reset controls.
+ * - Governs responsive CSS grid layouts and entrance animations for project cards.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
+@use '../abstracts/variables' as *;
 
-// ==========================================================================
-// Portal Landing Page — full layout for the central modpack dashboard
-// ==========================================================================
-
-// Full-page container (rendered into #app)
+/* ---------- PORTAL LAYOUT CONTAINER ---------- */
 .portal-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -21,9 +37,7 @@
   }
 }
 
-// --------------------------------------------------------------------------
-// Portal Hero Header (title + subtitle)
-// --------------------------------------------------------------------------
+/* ---------- HERO SPOTLIGHT HEADER ---------- */
 .portal-header {
   text-align: center;
   margin-bottom: 5rem;
@@ -70,14 +84,91 @@
   opacity: 0.7;
 }
 
-// --------------------------------------------------------------------------
-// Filter Section — grouped multi-select
-// --------------------------------------------------------------------------
+/* ---------- FILTER SECTION & CATEGORY TABS ---------- */
+.portal-filter-container {
+  margin-bottom: 2.5rem;
+}
+
 .portal-filter-section {
   margin-bottom: 2.5rem;
   animation: portal-fade-up 0.8s $transition-bezier 0.1s both;
 }
 
+.portal-category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid hsla(var(--border), 0.15);
+
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: hsla(var(--primary-text), 0.15) transparent;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: hsla(var(--primary-text), 0.15);
+      border-radius: 2px;
+      &:hover {
+        background: hsla(var(--primary), 0.4);
+      }
+    }
+  }
+}
+
+.category-tab-btn {
+  background: hsla(var(--surface), 0.4);
+  border: 1px solid hsla(var(--border), 0.2);
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  color: hsl(var(--secondary-text));
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: $theme-transition;
+
+  &:hover {
+    background: hsla(var(--surface), 0.8);
+    color: #fff;
+    border-color: hsla(var(--primary), 0.5);
+  }
+
+  &.active {
+    background: hsla(var(--primary), 0.15);
+    color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsla(var(--primary), 0.25);
+  }
+
+  .tab-count {
+    background: hsla(var(--border), 0.3);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 12px;
+    line-height: 1.2;
+  }
+
+  &.active .tab-count {
+    background: hsl(var(--primary));
+    color: #000;
+  }
+}
+
+/* ---------- FILTER GROUPS (MULTI-SELECT) ---------- */
 .portal-filter-groups {
   display: flex;
   flex-wrap: wrap;
@@ -94,6 +185,34 @@
   flex-direction: column;
   gap: 0.6rem;
   min-width: 0;
+
+  // Forge Brand Coloring
+  .filter-opt-forge {
+    &:hover {
+      border-color: hsla(20, 80%, 55%, 0.5);
+      color: #ffab91;
+    }
+    &.active {
+      border-color: hsl(20, 80%, 55%);
+      background: hsla(20, 80%, 55%, 0.15);
+      color: #ff8a65;
+      box-shadow: 0 0 12px hsla(20, 80%, 55%, 0.3);
+    }
+  }
+
+  // Fabric Brand Coloring
+  .filter-opt-fabric {
+    &:hover {
+      border-color: hsla(190, 80%, 55%, 0.5);
+      color: #80deea;
+    }
+    &.active {
+      border-color: hsl(190, 80%, 55%);
+      background: hsla(190, 80%, 55%, 0.15);
+      color: #4dd0e1;
+      box-shadow: 0 0 12px hsla(190, 80%, 55%, 0.3);
+    }
+  }
 }
 
 .filter-group-header {
@@ -131,7 +250,45 @@
   gap: 0.5rem;
 }
 
-// Meta row — archived toggle + reset button
+// Compact horizontal scrolling for Minecraft versions
+.filter-group-versions {
+  flex-grow: 1;
+  max-width: 650px;
+
+  @media (max-width: 1200px) {
+    max-width: 450px;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 100%;
+  }
+
+  .filter-group-btns {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    
+    // Sleek scrollbar for the versions row
+    scrollbar-width: thin;
+    scrollbar-color: hsla(var(--primary-text), 0.15) transparent;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: hsla(var(--primary-text), 0.15);
+      border-radius: 2px;
+      &:hover {
+        background: hsla(var(--primary), 0.4);
+      }
+    }
+  }
+}
+
+/* ---------- META ROW (ARCHIVE TOGGLE & RESET) ---------- */
 .portal-filter-meta {
   display: flex;
   align-items: center;
@@ -150,21 +307,22 @@
   user-select: none;
   transition: color 0.2s ease;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 1px solid hsla(var(--border), 0.6);
+    width: 18px;
+    height: 18px;
+    border: 2px solid hsla(var(--primary-text), 0.3);
     border-radius: 4px;
     background: transparent;
     cursor: pointer;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
 
     &:checked {
       background: hsl(var(--primary));
       border-color: hsl(var(--primary));
+      box-shadow: 0 0 10px hsla(var(--primary), 0.4);
 
       &::after {
         content: '✓';
@@ -172,10 +330,21 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 10px;
+        font-size: 11px;
         color: #000;
-        font-weight: 800;
+        font-weight: 900;
       }
+    }
+
+    &:hover {
+      border-color: hsl(var(--primary));
+      box-shadow: 0 0 8px hsla(var(--primary), 0.25);
+    }
+
+    &:focus-visible {
+      outline: 2px solid hsl(var(--primary));
+      outline-offset: 3px;
+      box-shadow: 0 0 12px hsla(var(--primary), 0.5);
     }
   }
 
@@ -201,9 +370,7 @@
   }
 }
 
-// --------------------------------------------------------------------------
-// Modpack Card Grid
-// --------------------------------------------------------------------------
+/* ---------- PROJECT CARD GRID ---------- */
 .portal-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -215,14 +382,12 @@
   }
 }
 
-// Utility: hidden card during filter
+/* ---------- UTILITY CLASSES ---------- */
 .hidden {
   display: none !important;
 }
 
-// --------------------------------------------------------------------------
-// Portal entrance keyframe animations
-// --------------------------------------------------------------------------
+/* ---------- ENTRANCE ANIMATIONS ---------- */
 @keyframes portal-fade-up {
   from {
     opacity: 0;

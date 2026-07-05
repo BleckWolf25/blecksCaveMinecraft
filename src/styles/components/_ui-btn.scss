@@ -1,6 +1,25 @@
+/*
+ * @file _ui-btn.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Modular reusable interactive button component styles and variants.
+ *
+ * @description:
+ * - Establishes base shared styling, focus states, and disabled attributes for all UI buttons.
+ * - Formats sidebar navigation menu buttons and active indicator borders.
+ * - Styles pill-shaped multi-select filter toggle buttons with HSL glow feedback.
+ * - Configures secondary wiki action buttons and primary editor controls.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
 @use "../abstracts/variables" as *;
 
-// Base Reusable Button Component styles
+/* ---------- BASE BUTTON STYLES ---------- */
 .ui-btn {
   font-family: inherit;
   cursor: pointer;
@@ -14,13 +33,18 @@
   font-weight: 600;
   text-decoration: none;
 
+  &:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 }
 
-// 1. Sidebar menu navigation buttons
+/* ---------- SIDEBAR NAVIGATION BUTTONS ---------- */
 .sidebar-menu-btn, .ui-btn-sidebar {
   background: transparent;
   border: 1px solid transparent;
@@ -49,7 +73,7 @@
   }
 }
 
-// 2. Portal Filter buttons
+/* ---------- PORTAL FILTER TOGGLE BUTTONS ---------- */
 .filter-btn, .ui-btn-filter {
   background: hsla(var(--surface), 0.5);
   border: 1px solid hsla(var(--border), 0.5);
@@ -78,7 +102,7 @@
   }
 }
 
-// 3. Wiki Edit button
+/* ---------- WIKI ACTION & SECONDARY BUTTONS ---------- */
 .wiki-edit-btn, .ui-btn-secondary {
   background: hsla(var(--primary), 0.1);
   border: 1px solid hsla(var(--primary), 0.3);
@@ -101,7 +125,7 @@
   }
 }
 
-// 4. In-Browser Editor Action buttons
+/* ---------- LIVE EDITOR ACTION BUTTONS ---------- */
 .editor-btn {
   border-radius: 8px;
   padding: 0.6rem 1.25rem;

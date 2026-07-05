@@ -1,13 +1,13 @@
 /*
  * @file style.scss
  *
- * @version 2.0.0
+ * @version 1.0.0
  * @author Bleckwolf25
  * @license MIT
  *
- * @summary Central SCSS hub — imports all modular partials in dependency order.
+ * @summary Central SCSS hub, imports all modular partials in dependency order.
  *
- * @description BEHAVIOR:
+ * @description:
  * - Imports Sass abstracts (variables & mixins) first so every downstream
  *   partial can safely use them via @use.
  * - Follows the 7-1 Sass architecture pattern: abstracts → base →
@@ -18,30 +18,20 @@
  * @since 02/06/2026
  * @updated 02/06/2026
  */
+/* ---------- ABSTRACTS ---------- */
+@use 'abstracts/variables' as *;
 
-// ----------------------------------------------------------------------------
-// 1. Abstracts — design tokens, Sass variables & reusable mixins
-//    (no output CSS on their own; only referenced by downstream partials)
-// ----------------------------------------------------------------------------
-@use "abstracts/variables" as *;
+/* ---------- BASE ---------- */
+@use 'base/reset';
 
-// ----------------------------------------------------------------------------
-// 2. Base — universal resets, root CSS custom-properties, typography, scrollbars
-// ----------------------------------------------------------------------------
-@use "base/reset";
+/* ---------- COMPONENTS ---------- */
+@use 'components/ui-btn';
+@use 'components/portal';
+@use 'components/ui-card';
+@use 'components/ui-alert';
+@use 'components/ui-modal';
+@use 'components/navigation';
+@use 'components/wiki-view';
 
-// ----------------------------------------------------------------------------
-// 3. Components — atomic & composite UI modules
-// ----------------------------------------------------------------------------
-@use "components/ui-btn";
-@use "components/portal";
-@use "components/ui-card";
-@use "components/ui-alert";
-@use "components/ui-modal";
-@use "components/navigation";
-@use "components/wiki-view";
-
-// ----------------------------------------------------------------------------
-// 4. Themes — per-modpack visual overrides applied last so they win cascade
-// ----------------------------------------------------------------------------
-@use "themes/modpacks";
+/* ---------- THEMES ---------- */
+@use 'themes/modpacks';

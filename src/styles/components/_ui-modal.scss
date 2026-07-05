@@ -1,6 +1,25 @@
+/*
+ * @file _ui-modal.scss
+ *
+ * @version 1.0.0
+ * @author Bleckwolf25
+ * @license MIT
+ *
+ * @summary Global search overlay modal dialog, input field, and interactive result items.
+ *
+ * @description:
+ * - Styles the global command-palette search modal dialog with backdrop blur overlays.
+ * - Formats the header search input field and placeholder typography.
+ * - Configures interactive search result list items, category tags, and highlight states.
+ * - Styles footer keyboard shortcuts navigation hints and empty state messages.
+ *
+ * @since 02/06/2026
+ * @updated 05/07/2026
+ */
+/* ---------- MODULE DEPENDENCIES ---------- */
 @use "../abstracts/variables" as *;
 
-// Global Search Overlay Dialog modal styles
+/* ---------- SEARCH MODAL DIALOG CONTAINER ---------- */
 .search-modal {
   background: hsla(var(--surface), 0.95);
   border: 1px solid hsla(var(--primary), 0.3);
@@ -22,6 +41,7 @@
   }
 }
 
+/* ---------- SEARCH INPUT FIELD ---------- */
 .search-input-wrapper {
   display: flex;
   align-items: center;
@@ -48,6 +68,7 @@
   }
 }
 
+/* ---------- RESULTS LIST & ITEMS ---------- */
 .search-results-container {
   max-height: 300px;
   overflow-y: auto;
@@ -95,6 +116,7 @@
   margin-top: 0.3rem;
 }
 
+/* ---------- MODAL FOOTER & KEYBOARD HINTS ---------- */
 .search-footer {
   display: flex;
   justify-content: space-between;
@@ -114,6 +136,7 @@
   }
 }
 
+/* ---------- EMPTY STATE MESSAGE ---------- */
 .search-empty {
   padding: 2rem;
   text-align: center;
