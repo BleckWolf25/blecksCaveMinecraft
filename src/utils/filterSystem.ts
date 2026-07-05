@@ -11,7 +11,7 @@
  * Implements the interactive project filtering workspace for the portal catalog, managing category navigation tabs, dynamic sub-filter buttons (such as mod loaders, resolutions, and Minecraft versions), archived project toggles, and state evaluation for grid rendering.
  *
  * @since 25/06/2026
- * @updated 04/07/2026
+ * @updated 05/07/2026
  */
 // ---------- IMPORTS
 import { Button } from '../components/ui/Button.ts';
@@ -60,9 +60,9 @@ export function initFilterSystem(config: FilterConfig): {
   const allVersions = new Set<string>();
   const allResolutions = new Set<string>();
 
-  Object.values(modpacks).forEach(pack => {
-    pack.specs.loaders?.forEach(l => allLoaders.add(l));
-    pack.specs.mcVersions?.forEach(v => allVersions.add(v));
+  Object.values(modpacks).forEach((pack) => {
+    pack.specs.loaders?.forEach((l) => allLoaders.add(l));
+    pack.specs.mcVersions?.forEach((v) => allVersions.add(v));
     if (pack.specs.resolution) {
       allResolutions.add(pack.specs.resolution);
     }
@@ -94,8 +94,14 @@ export function initFilterSystem(config: FilterConfig): {
 
   // ---------- TAB BADGE COMPUTATION
   function computeTabCounts(): Record<string, number> {
-    const counts: Record<string, number> = { all: 0, modpack: 0, mod: 0, 'resource-pack': 0, shader: 0 };
-    Object.values(modpacks).forEach(pack => {
+    const counts: Record<string, number> = {
+      all: 0,
+      modpack: 0,
+      mod: 0,
+      'resource-pack': 0,
+      shader: 0,
+    };
+    Object.values(modpacks).forEach((pack) => {
       // ---------- GUARD CLAUSE (ignore archived projects unless toggle is active)
       if (pack.isArchived && !filterState.showArchived) {
         return;
@@ -109,7 +115,7 @@ export function initFilterSystem(config: FilterConfig): {
 
   function updateTabBadges() {
     const counts = computeTabCounts();
-    tabsData.forEach(t => {
+    tabsData.forEach((t) => {
       const btn = tabButtonsMap.get(t.id);
       if (btn) {
         const badge = btn.querySelector('.tab-count');
@@ -120,7 +126,7 @@ export function initFilterSystem(config: FilterConfig): {
     });
   }
 
-  tabsData.forEach(t => {
+  tabsData.forEach((t) => {
     const btn = document.createElement('button');
     btn.className = `category-tab-btn ${t.id === 'all' ? 'active' : ''}`;
     btn.setAttribute('role', 'tab');
@@ -145,7 +151,7 @@ export function initFilterSystem(config: FilterConfig): {
       filterState.loaders.clear();
       filterState.resolutions.clear();
       filterState.versions.clear();
-      toggleBtnMap.forEach(toggleBtn => {
+      toggleBtnMap.forEach((toggleBtn) => {
         toggleBtn.classList.remove('active');
         toggleBtn.setAttribute('aria-pressed', 'false');
       });
@@ -190,7 +196,7 @@ export function initFilterSystem(config: FilterConfig): {
     const btnRow = document.createElement('div');
     btnRow.className = 'filter-group-btns';
 
-    options.forEach(opt => {
+    options.forEach((opt) => {
       const btn = Button({
         text: opt,
         variant: 'filter',
@@ -207,7 +213,7 @@ export function initFilterSystem(config: FilterConfig): {
           }
           updateGroupBadge(groupEl, stateSet.size);
           applyFilter();
-        }
+        },
       });
       btn.setAttribute('aria-pressed', 'false');
       btn.dataset.filterKey = `${groupKey}:${opt}`;
@@ -262,13 +268,13 @@ export function initFilterSystem(config: FilterConfig): {
     const compatibleVersions = new Set<string>();
     const compatibleResolutions = new Set<string>();
 
-    Object.values(modpacks).forEach(pack => {
+    Object.values(modpacks).forEach((pack) => {
       if (pack.isArchived && !filterState.showArchived) {
         return;
       }
       if (filterState.activeTab === 'all' || (pack.type || 'modpack') === filterState.activeTab) {
-        pack.specs.loaders?.forEach(l => compatibleLoaders.add(l));
-        pack.specs.mcVersions?.forEach(v => compatibleVersions.add(v));
+        pack.specs.loaders?.forEach((l) => compatibleLoaders.add(l));
+        pack.specs.mcVersions?.forEach((v) => compatibleVersions.add(v));
         if (pack.specs.resolution) {
           compatibleResolutions.add(pack.specs.resolution);
         }
@@ -277,6 +283,8 @@ export function initFilterSystem(config: FilterConfig): {
 
     toggleBtnMap.forEach((btn, key) => {
       const [groupKey, value] = key.split(':');
+      if (!value) return;
+
       let isCompatible = false;
 
       if (groupKey === 'loader') {
@@ -305,9 +313,18 @@ export function initFilterSystem(config: FilterConfig): {
     updateGroupBadge(versionGroup, filterState.versions.size);
 
     // Hide entire groups if no options are compatible at all
-    loaderGroup.style.display = ((filterState.activeTab === 'all' || filterState.activeTab === 'modpack' || filterState.activeTab === 'mod') && compatibleLoaders.size > 0) ? 'block' : 'none';
-    resolutionGroup.style.display = (filterState.activeTab === 'resource-pack' && compatibleResolutions.size > 0) ? 'block' : 'none';
-    versionGroup.style.display = (compatibleVersions.size > 0) ? 'block' : 'none';
+    loaderGroup.style.display =
+      (filterState.activeTab === 'all' ||
+        filterState.activeTab === 'modpack' ||
+        filterState.activeTab === 'mod') &&
+      compatibleLoaders.size > 0
+        ? 'block'
+        : 'none';
+    resolutionGroup.style.display =
+      filterState.activeTab === 'resource-pack' && compatibleResolutions.size > 0
+        ? 'block'
+        : 'none';
+    versionGroup.style.display = compatibleVersions.size > 0 ? 'block' : 'none';
   }
 
   updateFilterPillVisibility();
@@ -342,7 +359,7 @@ export function initFilterSystem(config: FilterConfig): {
     filterState.versions.clear();
     filterState.showArchived = false;
     archiveCheckbox.checked = false;
-    toggleBtnMap.forEach(btn => {
+    toggleBtnMap.forEach((btn) => {
       btn.classList.remove('active');
       btn.setAttribute('aria-pressed', 'false');
     });
@@ -376,16 +393,24 @@ export function initFilterSystem(config: FilterConfig): {
 
     // ---------- LOADER EVALUATION
 
-    if (filterState.loaders.size > 0 && (filterState.activeTab === 'all' || filterState.activeTab === 'modpack' || filterState.activeTab === 'mod')) {
+    if (
+      filterState.loaders.size > 0 &&
+      (filterState.activeTab === 'all' ||
+        filterState.activeTab === 'modpack' ||
+        filterState.activeTab === 'mod')
+    ) {
       const packLoaders = pack.specs.loaders || [];
-      const matchesLoader = packLoaders.some(l => filterState.loaders.has(l));
+      const matchesLoader = packLoaders.some((l) => filterState.loaders.has(l));
       if (!matchesLoader) {
         return false;
       }
     }
 
     // ---------- RESOLUTION & VERSION EVALUATION
-    if (filterState.resolutions.size > 0 && (filterState.activeTab === 'all' || filterState.activeTab === 'resource-pack')) {
+    if (
+      filterState.resolutions.size > 0 &&
+      (filterState.activeTab === 'all' || filterState.activeTab === 'resource-pack')
+    ) {
       if (!filterState.resolutions.has(pack.specs.resolution || '')) {
         return false;
       }
@@ -393,7 +418,7 @@ export function initFilterSystem(config: FilterConfig): {
 
     if (filterState.versions.size > 0) {
       const packVersions = pack.specs.mcVersions || [];
-      const matchesVersion = packVersions.some(v => filterState.versions.has(v));
+      const matchesVersion = packVersions.some((v) => filterState.versions.has(v));
       if (!matchesVersion) {
         return false;
       }
