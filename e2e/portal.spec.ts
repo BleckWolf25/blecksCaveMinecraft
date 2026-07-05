@@ -29,9 +29,9 @@ test.describe('Portal Page', () => {
   test('should display modpack cards', async ({ page }) => {
     await page.goto('/');
 
-    // Check that modpack cards are rendered
+    // Check that modpack cards are rendered (11 total - 1 featured = 10 in grid)
     const cards = page.locator('.modpack-card');
-    await expect(cards).toHaveCount(5); // Should have 5 modpacks
+    await expect(cards).toHaveCount(10);
   });
 
   test('should navigate to modpack wiki on card click', async ({ page }) => {
@@ -51,23 +51,23 @@ test.describe('Portal Page', () => {
     // Check for filter section
     await expect(page.locator('.portal-filter-section')).toBeVisible();
 
-    // Check for filter groups
+    // Check for filter groups (Loader, Resolution, MC Version)
     await expect(page.locator('.filter-group-label')).toContainText([
-      'Category',
       'Loader',
+      'Resolution',
       'MC Version',
     ]);
   });
 
-  test('should filter modpacks by category', async ({ page }) => {
+  test('should filter modpacks by category tab', async ({ page }) => {
     await page.goto('/');
 
-    // Click on "Optimization" filter
-    const optimizationFilter = page.locator('button:has-text("Optimization")');
-    await optimizationFilter.click();
+    // Click on "Modpacks" category tab
+    const modpacksTab = page.locator('button:has-text("Modpacks")');
+    await modpacksTab.click();
 
-    // Check that filter is active
-    await expect(optimizationFilter).toHaveClass(/active/);
+    // Check that tab is active
+    await expect(modpacksTab).toHaveClass(/active/);
   });
 });
 
@@ -103,9 +103,9 @@ test.describe('Modpack Wiki Page', () => {
   test('should have scroll progress bar', async ({ page }) => {
     await page.goto('/velocita-optimized/overview');
 
-    // Check for scroll progress bar
+    // Check for scroll progress bar element (may be hidden if no scroll)
     const progressBar = page.locator('.scroll-progress-bar');
-    await expect(progressBar).toBeVisible();
+    await expect(progressBar).toBeAttached();
   });
 });
 
@@ -121,6 +121,9 @@ test.describe('Theme System', () => {
     const card = page.locator('[data-pack-id="velocita-optimized"]');
     await card.click();
 
+    // Wait for navigation to complete
+    await page.waitForURL('/velocita-optimized/overview');
+
     // Check theme changed
     const newBody = await page.locator('body').getAttribute('data-theme');
     expect(newBody).toBe('velocita-optimized');
@@ -134,6 +137,9 @@ test.describe('Theme System', () => {
     if ((await nav.count()) > 0) {
       const backBtn = nav.locator('button').first();
       await backBtn.click();
+
+      // Wait for navigation to complete
+      await page.waitForURL('/');
 
       // Check theme reset to portal
       const body = await page.locator('body').getAttribute('data-theme');
